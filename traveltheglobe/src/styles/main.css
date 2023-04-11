@@ -14,8 +14,8 @@ code {
     monospace;
 }
 
-.brand-logo img{
-    height: 7vh;
+.logo-img{
+    max-height: 64px!important;
 }
 
 .error{ /* izmeniti ofc */

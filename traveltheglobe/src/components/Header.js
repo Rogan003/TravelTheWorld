@@ -14,7 +14,7 @@ const Header = () => {
     <header className = "navbar-fixed">
       <nav>
         <div className = "nav-wrapper">
-          <Link to="/" className = "brand-logo"><img src = {Logo} alt = "Logo" className = "responsive-img circle" /></Link>
+          <Link to="/" className = "brand-logo"><img src = {Logo} alt = "Logo" className = "logo-img" /></Link>
           <Link href="#" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></Link>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <li><Link to="/">Home</Link></li>
