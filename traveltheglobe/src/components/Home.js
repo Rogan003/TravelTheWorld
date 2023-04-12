@@ -86,12 +86,12 @@ const Home = () => {
 }});
 
   return (
-    <main>
-      <div className = "row valign-wrapper"> {/* lepse srediti ovo i nije responsive */}
+    <main className = "center-align valign-wrapper">
+      <div className = "row container">
       {
         Object.values(agencies).map((value,index) => {
           return (
-              <Agency name = {value['naziv']} img = {value['logo']} location = {value['adresa']} address = {Object.keys(agencies)[index]} />
+              <Agency item = {value} address = {Object.keys(agencies)[index]} />
           );
         })
       }

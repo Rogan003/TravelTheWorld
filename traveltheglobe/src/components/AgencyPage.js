@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import Destination from './Destination';
 
 const AgencyPage = () => {
   const { agencyId } = useParams();
@@ -462,7 +463,7 @@ const AgencyPage = () => {
         }
     }
 });
-  
+
   return (
     <main>
       <div className="row">
@@ -471,7 +472,7 @@ const AgencyPage = () => {
         </div>
       </div>
       <div className="row">
-        <div className="col s4 offset-s4">
+        <div className="col m8 offset-m2 l4 offset-l4">
           <img className="responsive-img" src = {agencies[agencyId]['logo']} alt = "Logo" />
         </div>
       </div>
@@ -500,7 +501,20 @@ const AgencyPage = () => {
                 </a>
         </div>
       </div>
-      {/* destinacije + carousel sa info za destinacije? */}
+      <div className="row">
+        <div className="center-align">
+          <h3>Destinacije</h3>
+        </div>
+      </div>
+      <div className = "row container">
+      {
+        Object.values(destinations[agencies[agencyId]['destinacije']]).map((value,index) => {
+          return (
+              <Destination item = {value} />
+          );
+        })
+      }
+      </div>
     </main>
   )
 }
