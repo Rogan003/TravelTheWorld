@@ -5,7 +5,7 @@ const Destination = (props) => {
   useEffect(() => {
     var elems = document.querySelectorAll('.carousel');
     M.Carousel.init(elems,{});
-  });
+  },[]);
 
   return (
     <div className="col s12">

@@ -8,7 +8,7 @@ const Header = () => {
   useEffect(() => {
     let sidenav = document.querySelector('#mobile-demo');
     M.Sidenav.init(sidenav, {});
-  });
+  },[]);
 
   return (
     <header>

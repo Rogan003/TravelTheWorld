@@ -13,7 +13,7 @@ const Agency = (props) => {
                 <div className="card-content activator"> {/* izmeniti mnogo manje da bude */}
                     <span className="card-title activator">{props.item['naziv']}<i className="material-icons right ">add_circle</i></span>
                 </div>
-                <div class="card-reveal container"> {/* odraditi CSS */}
+                <div className="card-reveal container"> {/* odraditi CSS */}
                     <div className="row">
                         <div className="center-align">
                             <span className = "card-title"><h3>Podaci</h3><i className="material-icons right">close</i></span>
