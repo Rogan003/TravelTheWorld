@@ -78,7 +78,8 @@ const AgencyPage = () => {
                   </div><div className="row container">
                       {Object.values(destinations[agencies[agencyId]['destinacije']]).map((value, index) => {
                           return (
-                              <Destination item={value} key={index} />
+                              <Destination item={value} key={Object.keys(destinations[agencies[agencyId]['destinacije']])[index]}
+                              address = {agencies[agencyId]['destinacije'] + "/" + Object.keys(destinations[agencies[agencyId]['destinacije']])[index]} />
                           );
                       })}
                   </div></>

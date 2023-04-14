@@ -2,12 +2,16 @@ import React, {useEffect} from 'react'
 import Logo from '../pics/logo.png'
 import { Link } from 'react-router-dom'
 import M from 'materialize-css';
+import Login from './Login';
+import Register from './Register'
 
 const Header = () => {
 
   useEffect(() => {
     let sidenav = document.querySelector('#mobile-demo');
     M.Sidenav.init(sidenav, {});
+    let elems = document.querySelectorAll('.modal');
+    M.Modal.init(elems,{});
   },[]);
 
   return (
@@ -20,8 +24,8 @@ const Header = () => {
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li><Link to="/">Home</Link></li>
               <li><Link to="/admin">Admin panel</Link></li>
-              <li><Link to="/login">Login</Link></li>
-              <li><Link to="/register">Register</Link></li>
+              <li><Link to = "#login">Login</Link></li>
+              <li><Link to = "#register">Register</Link></li>
             </ul>
           </div>
         </nav>
@@ -33,6 +37,9 @@ const Header = () => {
           <li><Link className='sidenav-close' to="/login">Login</Link></li>
           <li><Link className='sidenav-close' to="/register">Register</Link></li>
       </ul>
+
+      <Login />
+      <Register />
     </header>
   )
 }
