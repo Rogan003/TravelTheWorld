@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { db } from '../firebase-config';
 import { onValue, ref } from "firebase/database";
+import Destruction from './Destruction';
+import M from 'materialize-css';
 
 const Admin = () => {
   const [view,setView] = useState(false);
@@ -9,24 +11,30 @@ const Admin = () => {
   const [agencies,setAgencies] = useState({});
 
   useEffect(() => {
-    let query = ref(db, "korisnici");
+    if(JSON.stringify(agencies) === '{}' && JSON.stringify(users) === '{}')
+    {
+      let query = ref(db, "korisnici");
 
-    onValue(query, (snapshot) => {
+      onValue(query, (snapshot) => {
+        if(snapshot.exists())
+        {
+          setUsers(snapshot.val());
+        }
+      });
+      
+      query = ref(db,"agencjie");
+
+      onValue(query, (snapshot) => {
       if(snapshot.exists())
       {
-        setUsers(snapshot.val());
+          setAgencies(snapshot.val());
       }
-    });
+      });
+    }
     
-    query = ref(db,"agencjie");
-
-    onValue(query, (snapshot) => {
-     if(snapshot.exists())
-     {
-        setAgencies(snapshot.val());
-     }
-    });
-  },[]);
+    var elems = document.querySelectorAll('.modal');
+    M.Modal.init(elems, {});// druga varijanta staviti ovo u onclick <a>
+  });
 
   return ( //pripaziti sta se desava kada se obrisu svi korisnici ili sve agencije
     <main className = "container center-align">
@@ -59,7 +67,7 @@ const Admin = () => {
                 {
                     Object.values(users).map((value,index) => {
                         return (
-                            <tr key = {Object.keys(users)[index]}>
+                            <><tr key = {Object.keys(users)[index]}>
                                 <td>{value['korisnickoIme']}</td>
                                 <td>{value['lozinka']}</td>
                                 <td>{value['ime']}</td>
@@ -68,9 +76,10 @@ const Admin = () => {
                                 <td>{value['datumRodjenja']}</td>
                                 <td>{value['adresa']}</td>
                                 <td>{value['telefon']}</td>
-                                <td><a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">edit</i></a></td>
-                                <td><a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">delete</i></a></td>
+                                <td><a className="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">edit</i></a></td>
+                                <td><a className="btn-floating btn-large waves-effect waves-light red modal-trigger" href={"#destruction" + index}><i class="material-icons">delete</i></a></td>
                             </tr>
+                            <Destruction id = {"destruction" + index} naziv = {value['korisnickoIme']} /></>
                         );
                       })
                 }
@@ -101,16 +110,17 @@ const Admin = () => {
                 {// trenutno nemam destinacije ovde
                     Object.values(agencies).map((value,index) => {
                         return (
-                            <tr key = {Object.keys(agencies)[index]}>
+                            <><tr key = {Object.keys(agencies)[index]}>
                                 <td>{value['naziv']}</td>
                                 <td>{value['adresa']}</td>
                                 <td>{value['godina']}</td>
                                 <td><img src = {value['logo']} className = "responsive-img" /></td>
                                 <td>{value['brojTelefona']}</td>
                                 <td>{value['email']}</td>
-                                <td><a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">edit</i></a></td>
-                                <td><a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">delete</i></a></td>
+                                <td><a className="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">edit</i></a></td>
+                                <td><a className="btn-floating btn-large waves-effect waves-light red modal-trigger" href = {"#destructiona" + index}><i class="material-icons">delete</i></a></td>
                             </tr>
+                            <Destruction id = {"destructiona" + index} naziv = {value['naziv']} /></>
                         );
                       })
                 }

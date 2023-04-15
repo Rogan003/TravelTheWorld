@@ -8,10 +8,9 @@ import Register from './Register'
 const Header = () => {
 
   useEffect(() => {
-    let sidenav = document.querySelector('#mobile-demo');
-    M.Sidenav.init(sidenav, {});
-    let elems = document.querySelectorAll('.modal');
-    M.Modal.init(elems,{});
+    //let sidenav = document.querySelector('#mobile-demo');
+    //M.Sidenav.init(sidenav, {});
+    M.AutoInit();
   },[]);
 
   return (
@@ -24,8 +23,8 @@ const Header = () => {
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li><Link to="/">Home</Link></li>
               <li><Link to="/admin">Admin panel</Link></li>
-              <li><Link to = "#login">Login</Link></li>
-              <li><Link to = "#register">Register</Link></li>
+              <li><a className = "modal-trigger" href = "#login">Login</a></li>
+              <li><a className = "modal-trigger" href = "#register">Register</a></li>
             </ul>
           </div>
         </nav>
@@ -34,8 +33,8 @@ const Header = () => {
       <ul className="sidenav" id="mobile-demo">
           <li><Link className='sidenav-close' to="/">Home</Link></li>
           <li><Link className='sidenav-close' to="/admin">Admin panel</Link></li>
-          <li><Link className='sidenav-close' to="/login">Login</Link></li>
-          <li><Link className='sidenav-close' to="/register">Register</Link></li>
+          <li><a className = "modal-trigger" href = "#login">Login</a></li>
+          <li><a className = "modal-trigger" href = "#register">Register</a></li>
       </ul>
 
       <Login />

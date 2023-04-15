@@ -43,7 +43,7 @@ const DestinationPage = () => {
                 </div>
                 <div className="carousel">
                 { // kada se refresh sa bilo kakvom izmenom pocne da radi...
-                    destinations[destsId][destId]['slike'].map((data) => { return (<a className="carousel-item"><img src={data} alt = "Destination" /></a>); })
+                    destinations[destsId][destId]['slike'].map((data) => { return (<a className="carousel-item"><img src={data} alt = "Destination" className = "responsive-img" /></a>); })
                 }
                 </div>
             </div>
@@ -52,7 +52,7 @@ const DestinationPage = () => {
             edit && destinations.hasOwnProperty(destsId) && destinations[destsId].hasOwnProperty(destId) &&
             <div className="col s12 container center-align">
                 <span>
-                    <h5>Edit {destinations[destsId][destId]['naziv']}</h5>
+                    <h5>Izmeni {destinations[destsId][destId]['naziv']}</h5>
                     <a className="btn-floating btn-large waves-effect waves-light red" onClick={() => (setEdit(false))}><i className="material-icons">edit</i></a>
                 </span>
                 <div className="row">
