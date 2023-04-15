@@ -10,7 +10,7 @@ const Footer = () => {
             <div className = "container">
                 <span>Contact:</span>
                 <div>
-                    <FaEnvelope />
+                    <FaEnvelope /> 
                     Our Email: 
                     <a href="mailto: shophere@gmail.com" rel="noopener noreferrer" target = "_blank">
                         traveltheglobe@gmail.com

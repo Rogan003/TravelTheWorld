@@ -8,6 +8,8 @@ import DestinationPage from './components/DestinationPage'
 import Admin from './components/Admin'
 
 function App() {
+  // uradicu da se svi podaci ucitavaju odavde, takodje dodati onda i preloader onda
+
   return (
     <Router>
       <Header />

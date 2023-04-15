@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react'
-import Logo from '../pics/logo.png'
 import { Link } from 'react-router-dom'
 import M from 'materialize-css';
 import Login from './Login';
@@ -16,11 +15,10 @@ const Header = () => {
   return (
     <header>
       <div className = "navbar-fixed">
-        <nav >
+        <nav>
           <div className = "nav-wrapper">
-            <Link to="/" className = "brand-logo"><img src = {Logo} alt = "Logo" className = "logo-img" /></Link>
             <Link href="#" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></Link>
-            <ul id="nav-mobile" className="right hide-on-med-and-down">
+            <ul id="nav-mobile" className="container hide-on-med-and-down">
               <li><Link to="/">Home</Link></li>
               <li><Link to="/admin">Admin panel</Link></li>
               <li><a className = "modal-trigger" href = "#login">Login</a></li>

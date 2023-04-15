@@ -6,10 +6,13 @@ const Destination = (props) => {
   
   return (
       <div className="col s12 m12 l6 container">
-        <div className="card large blue-grey darken-1">
-          <div className="card-content white-text">
-            <span className="card-title">{props.item['naziv']}<Link className="btn-floating halfway-fab waves-effect waves-light red" to={address}><i className="material-icons">open_in_browser</i></Link></span>
-            <p>{props.item['opis']}</p>
+        <div className="card horizontal small white hoverable valign-wrapper center-align">
+          <div className = "card-image"> {/* nije bas najresponsive */}
+            <img src = {props.item['slike'][0]}/>
+          </div>
+          <div className="card-content card-stacked black-text">
+            <strong className="card-title">{props.item['naziv']}</strong>
+            <Link className="btn waves-effect waves-light" to={address}>Pogledajte</Link>
           </div>
         </div>
       </div>

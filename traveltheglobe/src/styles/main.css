@@ -15,7 +15,7 @@ code {
 }
 
 .logo-img{
-    max-height: 64px!important;
+    max-height: 250px!important;
 }
 
 .error{ /* izmeniti ofc */
@@ -25,4 +25,35 @@ code {
 
 footer{
     background-color: #075269;
+    color: white;
+}
+
+nav{
+    background-color: #075269;
+}
+
+.card{ /* ovo stvarno nema na materialize... */
+    border-radius: 15px;
+}
+
+.card img{
+    border-radius: 15px 15px 0 0 !important;
+    max-height: 300px; /* ne radi object-fit */
+}
+
+.card .btn{
+    background-color: #046380 !important;
+}
+
+.carousel-item img{
+    height: 250px; /* mozda povecati za vece uredjaje */
+}
+
+table{
+    margin: 2%;
+    border-radius: 15px;
+}
+
+.modal{
+    border-radius: 15px;
 }

@@ -20,6 +20,11 @@ const AgencyPage = () => {
       {
         setAgencies(snapshot.val());
       }
+
+      if(!snapshot.val().hasOwnProperty(agencyId))
+        {
+            navigate("/noagency");
+        }
     });
     
     query = ref(db,"destinacije");
@@ -30,11 +35,6 @@ const AgencyPage = () => {
        setDestinations(snapshot.val());
      }
     });
-
-    /* if(!agencies.hasOwnProperty(agencyId))
-    {
-        navigate("/noagency");
-    } */
   },[]);
 
   return ( // sta je stvar, setstate je asinhrona te treba koji sekund da se stvarno update, zato ovi uslovi i zato jos nema ovo gore, posle smisliti bolji nacin za to, await? citati, informisati se, smisliti
@@ -52,24 +52,32 @@ const AgencyPage = () => {
                       <div className="center-align">
                           <h3>Podaci</h3>
                       </div>
-                  </div><div className="row center-align">
+                  </div><div className="row center-align card-panel white flow-text hoverable">
                       <div className="col s6 l3">
-                          Adresa:
-                          <strong>{agencies[agencyId]['adresa']}</strong>
+                          <p>
+                            Adresa:
+                            <strong>{agencies[agencyId]['adresa']}</strong>
+                          </p>
                       </div>
                       <div className="col s6 l3">
-                          Godina osnivanja:
-                          <strong>{agencies[agencyId]['godina']}</strong>
+                          <p>
+                            Godina osnivanja:
+                            <strong>{agencies[agencyId]['godina']}</strong>
+                          </p>
                       </div>
-                      <div className="col s6 l3">
-                          Broj telefona:
-                          <strong>{agencies[agencyId]['brojTelefona']}</strong>
+                      <div className="col s12 l3">
+                          <p>
+                            Broj telefona:
+                            <strong>{agencies[agencyId]['brojTelefona']}</strong>
+                          </p>
                       </div>
-                      <div className="col s6 l3">
-                          Email:
-                          <a href={"mailto: " + agencies[agencyId]['email']} rel="noopener noreferrer" target="_blank">
-                              <strong>{agencies[agencyId]['email']}</strong>
-                          </a>
+                      <div className="col s12 l3">
+                          <p>
+                            Email:
+                            <a href={"mailto: " + agencies[agencyId]['email']} rel="noopener noreferrer" target="_blank">
+                                <strong>{agencies[agencyId]['email']}</strong>
+                            </a>
+                          </p>
                       </div>
                   </div><div className="row">
                       <div className="center-align">

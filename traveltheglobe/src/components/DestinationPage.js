@@ -1,6 +1,6 @@
 import React,{ useEffect, useState } from 'react'
 import M from "materialize-css"
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { db } from '../firebase-config';
 import { onValue, ref } from "firebase/database";
 
@@ -9,6 +9,7 @@ const DestinationPage = () => {
     const { destId } = useParams();
     const [destinations,setDestinations] = useState({});
     const [edit,setEdit] = useState(false);
+    const navigate = useNavigate();
 
   useEffect(() => {
     var elems = document.querySelectorAll('.carousel');
@@ -21,7 +22,12 @@ const DestinationPage = () => {
         onValue(query, (snapshot) => {
         if(snapshot.exists())
         {
-        setDestinations(snapshot.val());
+            setDestinations(snapshot.val());
+        }
+
+        if(!snapshot.val().hasOwnProperty(destsId) || !snapshot.val()[destsId].hasOwnProperty(destId)) //dodato kasnije
+        {
+            navigate("/nodestination");
         }
         });
     }
@@ -30,26 +36,41 @@ const DestinationPage = () => {
   return (
     <main>
         {   !edit && destinations.hasOwnProperty(destsId) && destinations[destsId].hasOwnProperty(destId) &&
-            <div className="col s12">
+            <>
                 <div className = "center-align">
-                    <span><h5>{destinations[destsId][destId]['naziv']}</h5><a className="btn-floating btn-large waves-effect waves-light red" onClick={() => (setEdit(true))}><i className="material-icons">edit</i></a></span>
-                    <p>
-                        {destinations[destsId][destId]['opis']}
-                    </p>
-                    <p>Tip putovanja: {destinations[destsId][destId]['tip']}</p>
-                    <p>Prevoz: {destinations[destsId][destId]['prevoz']}</p>
-                    <p>Cena: {destinations[destsId][destId]['cena']}</p>
-                    <p>Maksimalan broj osoba: {destinations[destsId][destId]['maxOsoba']}</p>
+                    <span><h1>{destinations[destsId][destId]['naziv']}</h1><a className="btn-floating btn-large waves-effect waves-light red" onClick={() => (setEdit(true))}><i className="material-icons">edit</i></a></span>
+                    <div className="center-align card-panel white flow-text hoverable">
+                        <div className = "col s12 container">
+                            <p>
+                                {destinations[destsId][destId]['opis']}
+                            </p>
+                        </div>
+                    </div>
+                    <div className="center-align card-panel white flow-text hoverable">
+                        <div classname = "col s12">
+                            <p>Tip putovanja: {destinations[destsId][destId]['tip']}</p>
+                        </div>
+                        <div classname = "col s12">
+                            <p>Prevoz: {destinations[destsId][destId]['prevoz']}</p>
+                        </div>
+                        <div classname = "col s12">
+                            <p>Cena: {destinations[destsId][destId]['cena']}</p>
+                        </div>
+                        <div classname = "col s12">
+                            <p>Maksimalan broj osoba: {destinations[destsId][destId]['maxOsoba']}</p>
+                        </div>
+                    </div>
                 </div>
                 <div className="carousel">
-                { // kada se refresh sa bilo kakvom izmenom pocne da radi...
+                {
                     destinations[destsId][destId]['slike'].map((data) => { return (<a className="carousel-item"><img src={data} alt = "Destination" className = "responsive-img" /></a>); })
                 }
                 </div>
-            </div>
+            </>
         }
         {
             edit && destinations.hasOwnProperty(destsId) && destinations[destsId].hasOwnProperty(destId) &&
+            
             <div className="col s12 container center-align">
                 <span>
                     <h5>Izmeni {destinations[destsId][destId]['naziv']}</h5>
@@ -166,4 +187,5 @@ const DestinationPage = () => {
 }
 // jedino pitanje sta za slike? jel ostavljamo linkove ili dajemo fajl da se okaci?
 // textarea prefill ulepsati kao i radio button ostalo okej
+// onLoad={M.textareaAutoResize(document.getElementById("opis"))}, ovo nece
 export default DestinationPage

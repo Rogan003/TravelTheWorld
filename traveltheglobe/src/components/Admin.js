@@ -5,7 +5,7 @@ import Destruction from './Destruction';
 import M from 'materialize-css';
 
 const Admin = () => {
-  const [view,setView] = useState(false);
+  const [view,setView] = useState(true);
 
   const [users,setUsers] = useState({});
   const [agencies,setAgencies] = useState({});
@@ -47,7 +47,7 @@ const Admin = () => {
           <div className = "row">
               <h3>Korisnici</h3>
           </div>
-          <table className = "highlight centered responsive-table">
+          <table className = "highlight centered responsive-table white">
             <thead>
             <tr>
                 <th>Korisnicko ime</th>
@@ -76,8 +76,8 @@ const Admin = () => {
                                 <td>{value['datumRodjenja']}</td>
                                 <td>{value['adresa']}</td>
                                 <td>{value['telefon']}</td>
-                                <td><a className="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">edit</i></a></td>
-                                <td><a className="btn-floating btn-large waves-effect waves-light red modal-trigger" href={"#destruction" + index}><i class="material-icons">delete</i></a></td>
+                                <td><a className="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">edit</i></a></td>
+                                <td><a className="btn-floating btn-small waves-effect waves-light red modal-trigger" href={"#destruction" + index}><i class="material-icons">delete</i></a></td>
                             </tr>
                             <Destruction id = {"destruction" + index} naziv = {value['korisnickoIme']} /></>
                         );
@@ -92,7 +92,7 @@ const Admin = () => {
           <div className = "row">
               <h3>Agencije</h3>
           </div>
-          <table className = "highlight centered responsive-table">
+          <table className = "highlight centered responsive-table white">
             <thead>
             <tr>
                 <th>Naziv</th>
@@ -117,8 +117,8 @@ const Admin = () => {
                                 <td><img src = {value['logo']} className = "responsive-img" /></td>
                                 <td>{value['brojTelefona']}</td>
                                 <td>{value['email']}</td>
-                                <td><a className="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">edit</i></a></td>
-                                <td><a className="btn-floating btn-large waves-effect waves-light red modal-trigger" href = {"#destructiona" + index}><i class="material-icons">delete</i></a></td>
+                                <td><a className="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">edit</i></a></td>
+                                <td><a className="btn-floating btn-small waves-effect waves-light red modal-trigger" href = {"#destructiona" + index}><i class="material-icons">delete</i></a></td>
                             </tr>
                             <Destruction id = {"destructiona" + index} naziv = {value['naziv']} /></>
                         );
@@ -131,5 +131,5 @@ const Admin = () => {
     </main>
   )
 }
-//malo ove tabele nisu full responsive al ae
+//malo ove tabele nisu full responsive
 export default Admin

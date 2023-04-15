@@ -5,44 +5,51 @@ const Agency = (props) => {
     const address = "agencies/" + props.address;
     return (
         <div className="col s12 m6 l4 container">
-            <div className="card large">
+            <div className="card small hoverable">
                 <div className="card-image waves-effect waves-block waves-light">
-                    <img src={props.item['logo']} className="activator responsive-img" />
-                    <Link className="btn-floating halfway-fab waves-effect waves-light red" to={address}><i className="material-icons">open_in_browser</i></Link>
-                </div> {/* drugo dugme? */}
-                <div className="card-content activator"> {/* izmeniti mnogo manje da bude */}
-                    <span className="card-title activator">{props.item['naziv']}<i className="material-icons right ">add_circle</i></span>
+                    <img src={props.item['logo']} className="activator responsive-img" /> {/* srediti jedino ovo */}
                 </div>
-                <div className="card-reveal container"> {/* odraditi CSS */}
+                <div className="card-content activator">
+                    <span className="card-title activator">{props.item['naziv']}<i className="material-icons right ">add_circle</i></span>
+                    <span> 
+                        <Link className="btn waves-effect waves-light" to={address}>Otvorite {props.item['naziv']}</Link>
+                    </span>
+                </div>
+                <div className="card-reveal container">
                     <div className="row">
-                        <div className="center-align">
-                            <span className = "card-title"><h3>Podaci</h3><i className="material-icons right">close</i></span>
+                        <span className = "card-title">
+                            <h3>{props.item['naziv']}</h3>
+                            <i className="material-icons">close</i>
+                        </span>
+                    </div>
+                    <div className="row">
+                        <div className="col s12 l6">
+                            <p>
+                                Adresa:
+                                <strong>{props.item['adresa']}</strong>
+                            </p>
+                        </div>
+                        <div className="col s12 l6">
+                            <p>
+                                Godina osnivanja:
+                                <strong>{props.item['godina']}</strong>
+                            </p>
                         </div>
                     </div>
                     <div className="row center-align">
-                        <div className="col s6 l3">
-                            Adresa:
-                            <strong>{props.item['adresa']}</strong>
+                        <div className="col s12 l6">
+                            <p>
+                                Broj telefona:
+                                <strong>{props.item['brojTelefona']}</strong>
+                            </p>
                         </div>
-                    </div>
-                    <div className="row center-align">
-                        <div className="col s6 l3">
-                            Godina osnivanja:
-                            <strong>{props.item['godina']}</strong>
-                        </div>
-                    </div>
-                    <div className="row center-align">
-                        <div className="col s6 l3">
-                            Broj telefona:
-                            <strong>{props.item['brojTelefona']}</strong>
-                        </div>
-                    </div>
-                    <div className="row center-align">
-                        <div className="col s6 l3">
-                            Email:
-                            <a href={"mailto: " + props.item['email']} rel="noopener noreferrer" target="_blank">
-                                <strong>{props.item['email']}</strong>
-                            </a>
+                        <div className="col s12 l6">
+                            <p>
+                                Email:
+                                <a href={"mailto: " + props.item['email']} rel="noopener noreferrer" target="_blank">
+                                    <strong>{props.item['email']}</strong>
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
