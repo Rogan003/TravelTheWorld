@@ -50,6 +50,10 @@ nav{
     min-width: 50%; /* odlicna fora, malo losija izgleda al nmvz */
 }
 
+.horizontal{
+    max-height: 27vh;
+}
+
 .card .btn{
     background-color: #046380 !important;
 }

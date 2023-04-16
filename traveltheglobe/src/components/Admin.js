@@ -3,17 +3,19 @@ import { db } from '../firebase-config';
 import { onValue, ref } from "firebase/database";
 import Destruction from './Destruction';
 import M from 'materialize-css';
+import AddDestinations from './AddDestinations';
 
 const Admin = () => {
   const [view,setView] = useState(true);
 
   const [users,setUsers] = useState({});
   const [agencies,setAgencies] = useState({});
+  const [destinations,setDestinations] = useState({});
   const [edit,setEdit] = useState(false);
   const [key,setKey] = useState(null);
 
   useEffect(() => {
-    if(JSON.stringify(agencies) === '{}' && JSON.stringify(users) === '{}')
+    if(JSON.stringify(agencies) === '{}' && JSON.stringify(users) === '{}'&& JSON.stringify(destinations) === '{}')
     {
       let query = ref(db, "korisnici");
 
@@ -30,6 +32,15 @@ const Admin = () => {
       if(snapshot.exists())
       {
           setAgencies(snapshot.val());
+      }
+      });
+
+      query = ref(db,"destinacije");
+
+      onValue(query, (snapshot) => {
+      if(snapshot.exists())
+      {
+          setDestinations(snapshot.val());
       }
       });
     }
@@ -232,25 +243,30 @@ const Admin = () => {
                   <h4>Destinacije</h4>
                 </div>
                 <div className = "offset-s1 col s6">
-                  <a className="btn-floating btn-small waves-effect waves-light red modal-trigger"><i class="material-icons">add</i></a>
-                  {/* dodati modal za dodavanje destinacije i ulepsati ovo */}
+                  <a className="btn-floating btn-small waves-effect waves-light red modal-trigger" href = "#adddest"><i class="material-icons">add</i></a>
+                  <AddDestinations />
                 </div>
               </div>
               <div className = "row">
-                <div className = "offset-s2 col s3 flow-text">
-                  Naziv
-                </div>
-                <div className = "offset-s1 col s6">
-                  <a className="btn-floating btn-small waves-effect waves-light red modal-trigger" href = {"#destructiond" + 0}><i class="material-icons">delete</i></a>
-                  <Destruction id = {"destructiond" + 0} naziv = "Naziv" />
-                </div>
-                {/* ovde sad dodati destinacije */}
+                {
+                  Object.values(destinations[agencies[key]['destinacije']]).map((value,index) => {
+                    let valkey = Object.keys(destinations[agencies[key]['destinacije']])[index];
+                    return(
+                      <><div className="offset-s2 col s3 flow-text">
+                        {value['naziv']}
+                      </div><div className="offset-s1 col s6">
+                          <a className="btn-floating btn-small waves-effect waves-light red modal-trigger" href={"#destructiond" + valkey}><i class="material-icons">delete</i></a>
+                          <Destruction id={"destructiond" + valkey} naziv={value['naziv']} />
+                        </div></>
+                    );
+                  })
+                }
               </div>
               <div className = "row">
                   <button class="btn waves-effect waves-light" onClick = {() => (setEdit(false))}>Back
                       <i class="material-icons right">arrow_back</i>
                   </button>
-                  <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                  <button class="btn waves-effect waves-light">Submit
                       <i class="material-icons right">send</i>
                   </button>
               </div>
