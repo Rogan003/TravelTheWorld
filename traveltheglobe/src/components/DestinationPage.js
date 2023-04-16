@@ -14,6 +14,7 @@ const DestinationPage = () => {
   useEffect(() => {
     var elems = document.querySelectorAll('.carousel');
     M.Carousel.init(elems,{});
+    M.updateTextFields(); // ne pomaze, videti da li ostaviti posle
 
     if(JSON.stringify(destinations) === '{}') // ako nema destinacija ne moze se ni doci ovde tkd je ovo dovoljno dobro resenje
     {
@@ -31,6 +32,12 @@ const DestinationPage = () => {
         }
         });
     }
+
+    if(document.getElementById("opis"))
+    {
+        M.textareaAutoResize(document.getElementById("opis"));
+    }
+
   });
 
   return (
@@ -54,7 +61,7 @@ const DestinationPage = () => {
                             <p>Prevoz: {destinations[destsId][destId]['prevoz']}</p>
                         </div>
                         <div classname = "col s12">
-                            <p>Cena: {destinations[destsId][destId]['cena']}</p>
+                            <p>Cena: {destinations[destsId][destId]['cena']} dinara</p>
                         </div>
                         <div classname = "col s12">
                             <p>Maksimalan broj osoba: {destinations[destsId][destId]['maxOsoba']}</p>
@@ -70,10 +77,9 @@ const DestinationPage = () => {
         }
         {
             edit && destinations.hasOwnProperty(destsId) && destinations[destsId].hasOwnProperty(destId) &&
-            
             <div className="col s12 container center-align">
                 <span>
-                    <h5>Izmeni {destinations[destsId][destId]['naziv']}</h5>
+                    <h1>Izmeni {destinations[destsId][destId]['naziv']}</h1>
                     <a className="btn-floating btn-large waves-effect waves-light red" onClick={() => (setEdit(false))}><i className="material-icons">edit</i></a>
                 </span>
                 <div className="row">
@@ -99,7 +105,7 @@ const DestinationPage = () => {
                         </div>
                     </div>
                     <div className="row">
-                        <label for="tip">Tip</label>
+                        <label for="tip" className = "flow-text">Tip</label>
                     </div>
                     <div className = "row">
                         <label>
@@ -131,7 +137,7 @@ const DestinationPage = () => {
                         </label>
                     </div>
                     <div className="row">
-                        <label for="prevoz">Vrsta prevoza</label>
+                        <label for="prevoz" className = "flow-text">Vrsta prevoza</label>
                     </div>
                     <div className = "row">
                         <label>
@@ -186,6 +192,5 @@ const DestinationPage = () => {
   )
 }
 // jedino pitanje sta za slike? jel ostavljamo linkove ili dajemo fajl da se okaci?
-// textarea prefill ulepsati kao i radio button ostalo okej
-// onLoad={M.textareaAutoResize(document.getElementById("opis"))}, ovo nece
+// srediti formu da radi kad pocnem malo vise da se bavim firebase uskoro 
 export default DestinationPage

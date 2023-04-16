@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Login = () => {
-  return (
+  return ( //modal odjednom jeste resposnive :)))
     <div id="login" className="modal">
       <div className="modal-content center-align container">
         <h4>Login</h4>

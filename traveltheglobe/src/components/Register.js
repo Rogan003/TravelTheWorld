@@ -30,7 +30,7 @@ const Register = () => {
               </div>
               <div class="input-field col l6 s12">
                 <input id="password" type="password" class="validate" />
-                <label for="password">Password</label>
+                <label for="password">Lozinka</label>
               </div>
             </div>
             <div className = "row">
@@ -46,7 +46,7 @@ const Register = () => {
             <div className = "row">
               <div class="input-field col l8 s12">
                 <input id="adresa" type="text" class="validate" />
-                <label for="adresa">Adresa u formatu: ulica i broj, mesto/grad, poštanski broj</label>
+                <label for="adresa">Adresa</label>
               </div>
               <div class="input-field col l4 s12">
                 <input id="telefon" type="text" class="validate" />
