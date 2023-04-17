@@ -19,20 +19,20 @@ const Header = () => {
           <div className = "nav-wrapper">
             <Link href="#" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></Link>
             <ul id="nav-mobile" className="container hide-on-med-and-down">
-              <li><Link to="/">Home</Link></li>
+              <li><Link to="/">Pocetna</Link></li>
               <li><Link to="/admin">Admin panel</Link></li>
               <li><a className = "modal-trigger" href = "#login">Login</a></li>
-              <li><a className = "modal-trigger" href = "#register">Register</a></li>
+              <li><a className = "modal-trigger" href = "#register">Registracija</a></li>
             </ul>
           </div>
         </nav>
       </div>
 
       <ul className="sidenav" id="mobile-demo">
-          <li><Link className='sidenav-close' to="/">Home</Link></li>
+          <li><Link className='sidenav-close' to="/">Pocetna</Link></li>
           <li><Link className='sidenav-close' to="/admin">Admin panel</Link></li>
           <li><a className = "modal-trigger" href = "#login">Login</a></li>
-          <li><a className = "modal-trigger" href = "#register">Register</a></li>
+          <li><a className = "modal-trigger" href = "#register">Registracija</a></li>
       </ul>
 
       <Login />

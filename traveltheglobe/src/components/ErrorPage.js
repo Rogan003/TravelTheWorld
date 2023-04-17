@@ -1,10 +1,20 @@
 import React from 'react'
+import Logo from '../pics/logo.png'
+import { Link } from 'react-router-dom'
 
 const ErrorPage = () => {
   return (
-    <div className = "error">
-      Error! This page is not available!
-    </div>
+    <main className = "container center-align error">
+      <div className = "flow-text section">
+        Desila se greska! Nije moguce prikazati ovu stranicu!
+      </div>
+      <div className = "section">
+        <Link to = "/"><img src = {Logo} alt = "Logo" className = "responsive-img" /></Link>
+      </div>
+      <div className = "flow-text section">
+        Vratite se na pocetnu stranicu!
+      </div>
+    </main>
   )
 }
 

@@ -18,11 +18,6 @@ code {
     max-height: 250px!important;
 }
 
-.error{ /* izmeniti ofc */
-    padding: 20vw;
-    background-color: orangered;
-}
-
 footer{
     background-color: #075269;
     color: white;
@@ -79,4 +74,8 @@ table img{
 
 .card-content{
     padding: 1vh !important;
+}
+
+.error img{
+    max-height: 40vh;
 }

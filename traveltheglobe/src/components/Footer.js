@@ -7,18 +7,18 @@ import { FaPhoneAlt } from "react-icons/fa";
 const Footer = () => {
   return (
     <footer>
-            <div className = "container">
-                <span>Contact:</span>
+            <div className = "container flow-text section">
+                <span>Kontakt:</span>
                 <div>
                     <FaEnvelope /> 
-                    Our Email: 
+                    Email: 
                     <a href="mailto: shophere@gmail.com" rel="noopener noreferrer" target = "_blank">
                         traveltheglobe@gmail.com
                     </a>
                 </div>
                 <div>
                     <FaPhoneAlt />
-                    Phone number: +381 65 57 30 724
+                    Broj telefona: +381 65 57 30 724
                 </div>
                 <div>
                     <FaFacebookSquare />
@@ -35,7 +35,7 @@ const Footer = () => {
                     </a>
                 </div>
                 <div>
-                    Travel the globe with us! ~ Made by Rogan003
+                    Putujte sa nama! ~ Made by Rogan003
                 </div>
             </div>
         </footer>
