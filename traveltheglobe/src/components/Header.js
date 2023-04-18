@@ -4,7 +4,7 @@ import M from 'materialize-css';
 import Login from './Login';
 import Register from './Register'
 
-const Header = () => {
+const Header = (props) => {
 
   useEffect(() => {
     //let sidenav = document.querySelector('#mobile-demo');
@@ -35,7 +35,7 @@ const Header = () => {
           <li><a className = "modal-trigger" href = "#register">Registracija</a></li>
       </ul>
 
-      <Login />
+      <Login users = {props.users} />
       <Register />
     </header>
   )

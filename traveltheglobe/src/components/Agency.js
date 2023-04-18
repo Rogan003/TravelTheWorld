@@ -7,7 +7,7 @@ const Agency = (props) => {
         <div className="col s12 m6 l4 container">
             <div className="card small hoverable">
                 <div className="card-image waves-effect waves-block waves-light">
-                    <img src={props.item['logo']} className="activator responsive-img" /> {/* srediti jedino ovo */}
+                    <img src={props.item['logo']} className="activator responsive-img" />
                 </div>
                 <div className="card-content activator">
                     <span className="card-title activator">{props.item['naziv']}<i className="material-icons right ">add_circle</i></span>
