@@ -15,7 +15,7 @@ const Agency = (props) => {
                         <Link className="btn waves-effect waves-light" to={address}>Otvorite {props.item['naziv']}</Link>
                     </span>
                 </div>
-                <div className="card-reveal container">
+                <div className="card-reveal container valign-wrapper">
                     <div className="row">
                         <span className = "card-title">
                             <h3>{props.item['naziv']}</h3>
@@ -39,7 +39,7 @@ const Agency = (props) => {
                     <div className="row center-align">
                         <div className="col s12 l6">
                             <p>
-                                Broj telefona:
+                                Telefon:
                                 <strong>{props.item['brojTelefona']}</strong>
                             </p>
                         </div>

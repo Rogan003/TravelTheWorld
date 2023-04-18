@@ -42,11 +42,15 @@ nav{
 }
 
 .horizontal .card-image{
-    min-width: 50%; /* odlicna fora, malo losija izgleda al nmvz */
+    width: 50%; /* odlicna fora, malo losija izgleda al nmvz */
 }
 
 .horizontal{
-    max-height: 27vh;
+    max-height: 25vh;
+}
+
+.horizontal .btn{
+    margin: 0 2vw 0 2vw;
 }
 
 .card .btn{
@@ -78,4 +82,8 @@ table img{
 
 .error img{
     max-height: 40vh;
+}
+
+.logo{
+    border: 10px solid #075269;
 }

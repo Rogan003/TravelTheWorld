@@ -9,8 +9,8 @@ const AddDestinations = () => {
           <form className="col s12">
             <div className="row">
               <div className="input-field col l4 s12">
-                <input id="naziv" type="text" className="validate" />
-                <label for="naziv">Naziv</label>
+                <input id="nazivdest" type="text" className="validate" />
+                <label for="nazivdest">Naziv</label>
               </div>
               <div className="input-field col l4 s4">
                 <input id="cena" type="number" className="validate" />

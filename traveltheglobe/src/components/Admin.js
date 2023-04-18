@@ -160,8 +160,8 @@ const Admin = () => {
               </div>
               <div className = "row">
                 <div class="input-field col l6 s12">
-                  <input id="username" type="text" class="validate" value = {users[key]['korisnickoIme']} />
-                  <label className = "active" for="username">Korisnicko ime</label>
+                  <input id="korime" type="text" class="validate" value = {users[key]['korisnickoIme']} />
+                  <label className = "active" for="korime">Korisnicko ime</label>
                 </div>
                 <div class="input-field col l6 s12">
                   <input id="password" type="password" class="validate" value = {users[key]['lozinka']} />
@@ -252,12 +252,12 @@ const Admin = () => {
                   Object.values(destinations[agencies[key]['destinacije']]).map((value,index) => {
                     let valkey = Object.keys(destinations[agencies[key]['destinacije']])[index];
                     return(
-                      <><div className="offset-s2 col s3 flow-text">
+                      <div className = "section"><div className="offset-s2 col s3 flow-text">
                         {value['naziv']}
                       </div><div className="offset-s1 col s6">
                           <a className="btn-floating btn-small waves-effect waves-light red modal-trigger" href={"#destructiond" + valkey}><i class="material-icons">delete</i></a>
                           <Destruction id={"destructiond" + valkey} naziv={value['naziv']} />
-                        </div></>
+                        </div></div>
                     );
                   })
                 }

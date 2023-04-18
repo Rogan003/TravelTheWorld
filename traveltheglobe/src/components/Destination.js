@@ -10,8 +10,8 @@ const Destination = (props) => {
           <div className = "card-image">
             <img src = {props.item['slike'][0]}/>
           </div>
-          <div className="card-content card-stacked black-text">
-            <strong className="card-title">{props.item['naziv']}</strong>
+          <div className="card-stacked black-text">
+            <div className = "card-content"><strong className="card-title">{props.item['naziv']}</strong></div>
             <Link className="btn waves-effect waves-light center-align" to={address}>Pogledajte</Link>
           </div>
         </div>

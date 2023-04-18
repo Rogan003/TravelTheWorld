@@ -46,7 +46,7 @@ const AgencyPage = () => {
                   </div>
               </div><div className="row">
                       <div className="col m8 offset-m2 l4 offset-l4">
-                          <img className="responsive-img" src={agencies[agencyId]['logo']} alt="Logo" />
+                          <img className="responsive-img logo z-depth-3" src={agencies[agencyId]['logo']} alt="Logo" />
                       </div>
                   </div><div className="row">
                       <div className="center-align">

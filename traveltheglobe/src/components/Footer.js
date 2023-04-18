@@ -35,7 +35,7 @@ const Footer = () => {
                     </a>
                 </div>
                 <div>
-                    Putujte sa nama! ~ Made by Rogan003
+                    Putujte sa nama! ~ Made by SV 36/2022
                 </div>
             </div>
         </footer>

@@ -12,7 +12,7 @@ const ErrorPage = () => {
         <Link to = "/"><img src = {Logo} alt = "Logo" className = "responsive-img" /></Link>
       </div>
       <div className = "flow-text section">
-        Vratite se na pocetnu stranicu!
+        Izvinjavamo se na ovome!
       </div>
     </main>
   )
