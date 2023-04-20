@@ -55,7 +55,7 @@ const Admin = (props) => {
                                 <td><a className="btn-floating btn-small waves-effect waves-light red" onClick = {() => {setEdit(true);setKey(Object.keys(props.users)[index]);}}><i class="material-icons">edit</i></a></td>
                                 <td><a className="btn-floating btn-small waves-effect waves-light red modal-trigger" href={"#destruction" + index}><i class="material-icons">delete</i></a></td>
                             </tr>
-                            <Destruction id = {"destruction" + index} naziv = {value['korisnickoIme']} /></>
+                            <Destruction id = {"destruction" + index} naziv = {value['korisnickoIme']} db = "korisnici" dbid =  {Object.keys(props.users)[index]} /></>
                         );
                       })
                 }
@@ -96,7 +96,7 @@ const Admin = (props) => {
                                 <td><a className="btn-floating btn-small waves-effect waves-light red" onClick = {() => {setEdit(true);setKey(Object.keys(props.agencies)[index]);}}><i class="material-icons">edit</i></a></td>
                                 <td><a className="btn-floating btn-small waves-effect waves-light red modal-trigger" href = {"#destructiona" + index}><i class="material-icons">delete</i></a></td>
                             </tr>
-                            <Destruction id = {"destructiona" + index} naziv = {value['naziv']} /></>
+                            <Destruction id = {"destructiona" + index} naziv = {value['naziv']} db = "agencjie" dbid = {Object.keys(props.agencies)[index]} /></>
                         );
                       })
                 }
@@ -219,7 +219,9 @@ const Admin = (props) => {
                         {value['naziv']}
                       </div><div className="offset-s1 col s6">
                           <a className="btn-floating btn-small waves-effect waves-light red modal-trigger" href={"#destructiond" + valkey}><i class="material-icons">delete</i></a>
-                          <Destruction id={"destructiond" + valkey} naziv={value['naziv']} />
+                          <Destruction id={"destructiond" + valkey} naziv={value['naziv']}
+                          db = {"destinacije/" + props.agencies[key]['destinacije']}
+                          dbid = {Object.keys(props.destinations[props.agencies[key]['destinacije']])[index]} />
                         </div></div>
                     );
                   })

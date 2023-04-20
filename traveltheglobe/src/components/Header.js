@@ -36,7 +36,7 @@ const Header = (props) => {
       </ul>
 
       <Login users = {props.users} />
-      <Register />
+      <Register users = {props.users} />
     </header>
   )
 }
