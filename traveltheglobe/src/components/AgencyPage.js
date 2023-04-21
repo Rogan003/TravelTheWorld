@@ -53,7 +53,21 @@ const AgencyPage = (props) => {
             </a>
           </p>
         </div>
-      </div><div className="row">
+      </div>
+      <div className="row center-align card-panel white flow-text hoverable">
+        <div className = "row container">
+          <div class="col s12">
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">search</i>
+                <input type="text" id="autocomplete-input" class="autocomplete" />
+                <label for="autocomplete-input">Pretrazite destinacije...</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="row">
         <div className="center-align">
           <h3>Destinacije</h3>
         </div>

@@ -62,14 +62,9 @@ const AddDestinations = () => {
               </label>
             </div>
             <div className="row">
-              <div className="file-field input-field">
-                <div className="btn">
-                  <span>Slike</span>
-                  <input type="file" multiple />
-                </div>
-                <div className="file-path-wrapper">
-                  <input className="file-path validate" type="text" placeholder="Upload one or more files" />
-                </div>
+              <div className="input-field col s12">
+                <textarea id="slike" className="materialize-textarea"></textarea>
+                <label for="slike">Slike(linkovi, odvojite enterom)</label>
               </div>
             </div>
           </form>

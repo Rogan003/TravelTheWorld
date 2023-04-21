@@ -7,6 +7,7 @@ const DestinationPage = (props) => {
     const { destId } = useParams();
     const [edit,setEdit] = useState(false);
     const navigate = useNavigate();
+    const [inputs,setInputs] = useState({});
 
   useEffect(() => {
     var elems = document.querySelectorAll('.carousel');
@@ -21,6 +22,23 @@ const DestinationPage = (props) => {
     if(document.getElementById("opis"))
     {
         M.textareaAutoResize(document.getElementById("opis"));
+    }
+
+    if(document.getElementById("slike"))
+    {
+        M.textareaAutoResize(document.getElementById("slike"));
+    }
+
+    if(!inputs.hasOwnProperty("slike"))
+    {
+        let pics = "";
+        
+        props.destinations[destsId][destId]['slike'].forEach(element => {
+            pics += element + "\n";
+        });
+        
+        pics = pics.substring(0,pics.length - 1);
+        setInputs({slike : pics});
     }
   });
 
@@ -153,14 +171,11 @@ const DestinationPage = (props) => {
                         </label>
                     </div>
                     <div className="row">
-                        <div className="file-field input-field">
-                            <div className="btn">
-                                <span>Slike</span> 
-                                <input type="file" multiple />
-                            </div>
-                            <div className="file-path-wrapper">
-                                <input className="file-path validate" type="text" placeholder="Upload one or more files" />
-                            </div>
+                        <div className="input-field col s12">
+                            <textarea id="slike" className="materialize-textarea">
+                                {inputs.slike}
+                            </textarea>
+                            <label for="slike">Slike(linkovi, odvojite enterom)</label>
                         </div>
                     </div>
                     <div className = "row">

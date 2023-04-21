@@ -12,11 +12,17 @@ const Admin = (props) => {
   useEffect(() => {    
     var elems = document.querySelectorAll('.modal');
     M.Modal.init(elems, {});// druga varijanta staviti ovo u onclick <a>
+
+    var elems = document.querySelectorAll('.tooltipped');
+    M.Tooltip.init(elems, {});
   });
 
   return (
     <main className = "container center-align">
-        <h1>Admin stranica</h1><a class="btn-floating btn-large waves-effect waves-light red" onClick={() => {setView(!view);setEdit(false);}}><i class="material-icons">cached</i></a>
+        <h1>Admin stranica</h1>
+        <a class="btn-floating btn-large waves-effect waves-light red tooltipped" data-position="right" data-tooltip="Korisnici/Agencije" onClick={() => {setView(!view);setEdit(false);}}>
+          <i class="material-icons">cached</i>
+        </a>
         {
           view && !edit &&
           <>
@@ -215,9 +221,9 @@ const Admin = (props) => {
                   Object.values(props.destinations[props.agencies[key]['destinacije']]).map((value,index) => {
                     let valkey = Object.keys(props.destinations[props.agencies[key]['destinacije']])[index];
                     return(
-                      <div className = "section"><div className="offset-s2 col s3 flow-text">
+                      <div className = "section"><div className="col s6 flow-text">
                         {value['naziv']}
-                      </div><div className="offset-s1 col s6">
+                      </div><div className="col s6 flow-text">
                           <a className="btn-floating btn-small waves-effect waves-light red modal-trigger" href={"#destructiond" + valkey}><i class="material-icons">delete</i></a>
                           <Destruction id={"destructiond" + valkey} naziv={value['naziv']}
                           db = {"destinacije/" + props.agencies[key]['destinacije']}

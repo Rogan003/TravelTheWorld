@@ -9,6 +9,7 @@ import Admin from './components/Admin'
 import { useEffect, useState } from 'react'
 import { onValue, ref } from 'firebase/database'
 import { db } from './firebase-config'
+import 'materialize-css/dist/css/materialize.min.css'
 
 function App() {
   const [agencies,setAgencies] = useState("a");
@@ -42,13 +43,16 @@ function App() {
       }
       {
         !(agencies === "a" || destinations === "d" || users === "u") &&
-        <><Header users={users} /><Routes>
+        <>
+        <Header users={users} />
+        <Routes>
           <Route path="/" element={<Home agencies={agencies} />} />
           <Route path="/agencies/:agencyId" element={<AgencyPage agencies={agencies} destinations={destinations} />} />
           <Route path="/agencies/:agencyId/destinations/:destsId/:destId" element={<DestinationPage destinations={destinations} />} />
           <Route path="/admin" element={<Admin agencies={agencies} destinations={destinations} users={users} />} />
           <Route path="*" element={<ErrorPage />} />
-        </Routes></>
+        </Routes>
+        </>
       }
       <Footer />
     </Router>

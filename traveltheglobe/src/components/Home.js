@@ -19,6 +19,17 @@ const Home = (props) => {
             Istrazite sami!
           </p>
         </div>
+        <div className = "row container">
+          <div class="col s12">
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">search</i>
+                <input type="text" id="autocomplete-input" class="autocomplete" />
+                <label for="autocomplete-input">Pretrazite agencije...</label>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div className = "row container">
       {
