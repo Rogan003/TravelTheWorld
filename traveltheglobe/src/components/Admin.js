@@ -9,7 +9,9 @@ const Admin = (props) => {
   const [edit,setEdit] = useState(false);
   const [key,setKey] = useState(null);
 
-  useEffect(() => {    
+  useEffect(() => {
+    window.scrollTo(0, 0);
+       
     var elems = document.querySelectorAll('.modal');
     M.Modal.init(elems, {});// druga varijanta staviti ovo u onclick <a>
 
@@ -158,10 +160,10 @@ const Admin = (props) => {
                 </div>
               </div>
               <div className = "row">
-                  <button class="btn waves-effect waves-light" onClick = {() => (setEdit(false))}>Back
+                  <button class="btn waves-effect waves-light" onClick = {() => (setEdit(false))}>Nazad
                       <i class="material-icons right">arrow_back</i>
                   </button>
-                  <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                  <button class="btn waves-effect waves-light" type="submit" name="action">Izmenite korisnika
                       <i class="material-icons right">send</i>
                   </button>
               </div>
@@ -208,10 +210,10 @@ const Admin = (props) => {
                 </div>
               </div>
               <div className = "row valign-wrapper">
-                <div className = "offset-s2 col s3">
+                <div className = "col s7">
                   <h4>Destinacije</h4>
                 </div>
-                <div className = "offset-s1 col s6">
+                <div className = "col s5">
                   <a className="btn-floating btn-small waves-effect waves-light red modal-trigger" href = "#adddest"><i class="material-icons">add</i></a>
                   <AddDestinations />
                 </div>
@@ -221,9 +223,9 @@ const Admin = (props) => {
                   Object.values(props.destinations[props.agencies[key]['destinacije']]).map((value,index) => {
                     let valkey = Object.keys(props.destinations[props.agencies[key]['destinacije']])[index];
                     return(
-                      <div className = "section"><div className="col s6 flow-text">
+                      <div className = "section"><div className="col s7 flow-text">
                         {value['naziv']}
-                      </div><div className="col s6 flow-text">
+                      </div><div className="col s5 flow-text">
                           <a className="btn-floating btn-small waves-effect waves-light red modal-trigger" href={"#destructiond" + valkey}><i class="material-icons">delete</i></a>
                           <Destruction id={"destructiond" + valkey} naziv={value['naziv']}
                           db = {"destinacije/" + props.agencies[key]['destinacije']}
@@ -234,10 +236,10 @@ const Admin = (props) => {
                 }
               </div>
               <div className = "row">
-                  <button class="btn waves-effect waves-light" onClick = {() => (setEdit(false))}>Back
+                  <button class="btn waves-effect waves-light" onClick = {() => (setEdit(false))}>Nazad
                       <i class="material-icons right">arrow_back</i>
                   </button>
-                  <button class="btn waves-effect waves-light">Submit
+                  <button class="btn waves-effect waves-light">Izmenite agenciju
                       <i class="material-icons right">send</i>
                   </button>
               </div>

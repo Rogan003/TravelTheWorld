@@ -10,7 +10,8 @@ const Register = (props) => {
 
   const navigate = useNavigate();
 
-  const register = () => {
+  const register = (event) => {
+    event.preventDefault();
       var isOkay = true;
   
       if(inputs.korisnickoIme && inputs.korisnickoIme !== "")
@@ -126,6 +127,7 @@ const Register = (props) => {
     () => {
         var elems = document.querySelectorAll('.datepicker');
         M.Datepicker.init(elems,{format:"yyyy-mm-dd",
+        defaultDate: new Date("2003-03-01"),
           onClose:()=>{
               handleChange({target:{name:"datum",value:elems[0].value}});
           }
@@ -134,10 +136,10 @@ const Register = (props) => {
   );
   return (
     <div id="register" className="modal">
+      <form onSubmit = {register}>
       <div className="modal-content center-align container">
-        <h4>Register</h4>
+        <h4>Registracija</h4>
         <div className = "row">
-          <form className = "col s12">
             <div className = "row">
               <div class="input-field col l6 s12">
                 <input id="ime" type="text" class="validate" name = "ime" value = {inputs.ime || ""} onChange = {handleChange} />
@@ -186,13 +188,13 @@ const Register = (props) => {
                 <span className = "helper-text" data-error = "Neispravan broj telefona"></span>
               </div>
             </div>
-          </form>
         </div>
       </div>
       <div className="modal-footer">
-        <a href="#!" className="modal-close waves-effect waves-red btn-flat">Cancel</a>
-        <a href="#!" className="waves-effect waves-green btn-flat" onClick = {() => register()}>Register</a>
+        <a href="#!" className="modal-close waves-effect waves-red btn-flat">Ponisti</a>
+        <input className="waves-effect waves-green btn-flat" type = "submit" value = "Registruj se" />
       </div>
+      </form>
     </div>
   )
 }

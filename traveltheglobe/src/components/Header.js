@@ -21,7 +21,7 @@ const Header = (props) => {
             <ul id="nav-mobile" className="container hide-on-med-and-down">
               <li><Link to="/">Pocetna</Link></li>
               <li><Link to="/admin">Admin panel</Link></li>
-              <li><a className = "modal-trigger" href = "#login">Login</a></li>
+              <li><a className = "modal-trigger" href = "#login">Prijavi se</a></li>
               <li><a className = "modal-trigger" href = "#register">Registracija</a></li>
             </ul>
           </div>
@@ -31,7 +31,7 @@ const Header = (props) => {
       <ul className="sidenav" id="mobile-demo">
           <li><Link className='sidenav-close' to="/">Pocetna</Link></li>
           <li><Link className='sidenav-close' to="/admin">Admin panel</Link></li>
-          <li><a className = "modal-trigger" href = "#login">Login</a></li>
+          <li><a className = "modal-trigger" href = "#login">Prijavi se</a></li>
           <li><a className = "modal-trigger" href = "#register">Registracija</a></li>
       </ul>
 

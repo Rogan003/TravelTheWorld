@@ -6,7 +6,8 @@ const Login = (props) => {
   const [password,setPassword] = useState("");
   const [errMsg,setErrMsg] = useState("");
 
-  const login = () => {
+  const login = (event) => {
+    event.preventDefault();
     var exists = false;
   
     Object.values(props.users).map(value => {
@@ -30,10 +31,10 @@ const Login = (props) => {
 
   return (
     <div id="login" className="modal">
+      <form onSubmit = {login}>
       <div className="modal-content center-align container">
-        <h4>Login</h4>
+        <h4>Prijavi se</h4>
         <div className = "row">
-          <form className = "col s12">
             <div class="input-field col l6 s12">
               <input id="username" type="text" className = "validate" value = {username} onChange = {e => setUsername(e.target.value)}/>
               <label for="username">Korisnicko ime</label>
@@ -44,13 +45,13 @@ const Login = (props) => {
               <label for="password">Lozinka</label>
               <span className = "helper-text" data-error = {errMsg}></span>
             </div>
-          </form>
         </div>
       </div>
       <div className="modal-footer">
-        <a href="#!" className="modal-close waves-effect waves-red btn-flat">Cancel</a>
-        <a href="#!" className="waves-effect waves-green btn-flat" onClick = {() => login()}>Login</a>
+        <a href="#!" className="modal-close waves-effect waves-red btn-flat">Ponisti</a>
+        <input className="waves-effect waves-green btn-flat" type = "submit" value = "Prijavi se" />
       </div>
+      </form>
     </div>
   )
 }

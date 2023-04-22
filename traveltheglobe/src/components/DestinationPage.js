@@ -10,6 +10,8 @@ const DestinationPage = (props) => {
     const [inputs,setInputs] = useState({});
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     var elems = document.querySelectorAll('.carousel');
     M.Carousel.init(elems,{});
     M.updateTextFields(); // ne pomaze, videti da li ostaviti posle
@@ -179,7 +181,7 @@ const DestinationPage = (props) => {
                         </div>
                     </div>
                     <div className = "row">
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Izmeni destinaciju
                             <i class="material-icons right">send</i>
                         </button>
                     </div>

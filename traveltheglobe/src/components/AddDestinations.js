@@ -71,10 +71,10 @@ const AddDestinations = () => {
         </div>
       </div>
       <div className="modal-footer">
-        <a href="#!" class="btn waves-effect waves-light modal-close">Back
+        <a href="#!" class="btn waves-effect waves-light modal-close">Nazad
           <i class="material-icons right">arrow_back</i>
         </a>
-        <a href="#!" class="btn waves-effect waves-light modal-close">Submit
+        <a href="#!" class="btn waves-effect waves-light modal-close">Dodaj destinaciju
           <i class="material-icons right">send</i>
         </a>
       </div>

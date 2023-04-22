@@ -33,7 +33,7 @@ nav{
 
 .card img{
     border-radius: 15px 15px 0 0 !important;
-    max-height: 250px; /* ne radi object-fit */
+    max-height: 250px;
 }
 
 .horizontal img{
@@ -42,7 +42,7 @@ nav{
 }
 
 .horizontal .card-image{
-    width: 50%; /* odlicna fora, malo losija izgleda al nmvz */
+    width: 50%;
 }
 
 .horizontal{
@@ -57,10 +57,18 @@ nav{
     background-color: #046380 !important;
 }
 
+.carousel{ /* radi super, samo treba reload */
+    min-height: 70vmin !important;
+}
+
+.carousel-item{
+    height: auto !important;
+    width: auto !important;
+}
+
 .carousel-item img{
-    height: 250px;
-    /* max-width: 150% !important;
-    width: 250px !important;  mozda povecati za vece uredjaje */
+    height: 50vmin !important;
+    width: 50vmin !important;
 }
 
 table{

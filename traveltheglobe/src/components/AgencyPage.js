@@ -8,6 +8,8 @@ const AgencyPage = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+    
     if (!props.agencies.hasOwnProperty(agencyId)) {
       navigate("/noagency");
     }
