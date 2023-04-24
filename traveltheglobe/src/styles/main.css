@@ -95,3 +95,7 @@ table img{
 .logo{
     border: 10px solid #075269;
 }
+
+.margin{
+    margin: 1vmin;
+}

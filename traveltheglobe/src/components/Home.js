@@ -1,9 +1,22 @@
-import React from 'react' 
+import React, { useEffect } from 'react' 
 import Agency from './Agency'
 import { Link } from 'react-router-dom';
 import Logo from '../pics/logo.png'
+import M from 'materialize-css'
 
 const Home = (props) => {
+  useEffect(() => {
+    var elems = document.querySelectorAll('.autocomplete');
+    var data = {}
+
+    for(var agency in props.agencies)
+    {
+      data[props.agencies[agency]['naziv']] = null;
+    }
+
+    M.Autocomplete.init(elems, {data : data});
+  });
+
   return (
     <main className = "center-align">
       <div className = "row container">

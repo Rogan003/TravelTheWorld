@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import Destination from './Destination';
+import M from 'materialize-css';
 
 const AgencyPage = (props) => {
   const { agencyId } = useParams();
@@ -13,6 +14,16 @@ const AgencyPage = (props) => {
     if (!props.agencies.hasOwnProperty(agencyId)) {
       navigate("/noagency");
     }
+
+    var elems = document.querySelectorAll('.autocomplete');
+    var data = {}
+
+    for(var agency in props.destinations[props.agencies[agencyId]['destinacije']])
+    {
+      data[props.destinations[props.agencies[agencyId]['destinacije']][agency]['naziv']] = null;
+    }
+
+    M.Autocomplete.init(elems, {data : data});
   }, []);
 
   return (

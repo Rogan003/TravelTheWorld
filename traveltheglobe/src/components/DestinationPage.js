@@ -49,7 +49,12 @@ const DestinationPage = (props) => {
         {   !edit &&
             <>
                 <div className = "center-align">
-                    <span><h1>{props.destinations[destsId][destId]['naziv']}</h1><a className="btn-floating btn-large waves-effect waves-light red" onClick={() => (setEdit(true))}><i className="material-icons">edit</i></a></span>
+                    <div className = "contaier"><h1>{props.destinations[destsId][destId]['naziv']}</h1>
+                        <a className="btn-floating btn-large waves-effect waves-light red margin" onClick={() => (setEdit(true))}><i className="material-icons">edit</i></a>
+                        <button class="btn-floating btn-large waves-effect waves-light red margin" onClick = {() => (navigate(-1))}>
+                            <i class="material-icons right">arrow_back</i>
+                        </button>
+                    </div>
                     <div className="center-align card-panel white flow-text hoverable">
                         <div className = "col s12 container">
                             <p>

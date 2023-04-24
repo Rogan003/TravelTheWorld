@@ -12,7 +12,7 @@ const Footer = () => {
                 <div>
                     <FaEnvelope /> 
                     Email: 
-                    <a href="mailto: shophere@gmail.com" rel="noopener noreferrer" target = "_blank">
+                    <a href="mailto: traveltheglobe@gmail.com" rel="noopener noreferrer" target = "_blank">
                         traveltheglobe@gmail.com
                     </a>
                 </div>
