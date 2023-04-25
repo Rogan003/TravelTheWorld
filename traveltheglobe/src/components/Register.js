@@ -125,7 +125,7 @@ const Register = (props) => {
 
   useEffect(
     () => {
-        var elems = document.querySelectorAll('.datepicker');
+        var elems = document.querySelectorAll('#datum');
         M.Datepicker.init(elems,{format:"yyyy-mm-dd",
         defaultDate: new Date("2003-03-01"),
           onClose:()=>{

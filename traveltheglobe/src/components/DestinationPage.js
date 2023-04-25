@@ -1,6 +1,8 @@
 import React,{ useEffect, useState } from 'react'
 import M from "materialize-css"
 import { useParams, useNavigate } from 'react-router-dom';
+import { ref, set } from "firebase/database";
+import { db } from '../firebase-config';
 
 const DestinationPage = (props) => {
     const { destsId } = useParams();
@@ -9,12 +11,10 @@ const DestinationPage = (props) => {
     const navigate = useNavigate();
     const [inputs,setInputs] = useState({});
 
+  useEffect(() => {window.scrollTo(0, 0);},[]);
   useEffect(() => {
-    window.scrollTo(0, 0);
-
     var elems = document.querySelectorAll('.carousel');
     M.Carousel.init(elems,{});
-    M.updateTextFields(); // ne pomaze, videti da li ostaviti posle
 
     if(!props.destinations.hasOwnProperty(destsId) || !props.destinations[destsId].hasOwnProperty(destId))
     {
@@ -40,9 +40,92 @@ const DestinationPage = (props) => {
         });
         
         pics = pics.substring(0,pics.length - 1);
-        setInputs({slike : pics});
+        setInputs({naziv : props.destinations[destsId][destId]['naziv'],
+        cena : props.destinations[destsId][destId]['cena'],
+        maxosobe : props.destinations[destsId][destId]['maxOsoba'],
+        opis : props.destinations[destsId][destId]['opis'],
+        tip : props.destinations[destsId][destId]['tip'],
+        prevoz : props.destinations[destsId][destId]['prevoz'],
+        slike : pics});
     }
   });
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    let value = e.target.value;
+
+    setInputs(values => ({...values,[name] : value}))
+  }
+
+  function isImgUrl(url) {
+    return /\.(jpg|jpeg|png|webp|avif|gif)$/.test(url)
+  }
+
+  const izmeni = (event) => {
+    event.preventDefault();
+    var isOkay = true;
+    
+    if(inputs.naziv === "")
+    {
+        isOkay = false;
+        document.getElementById("naziv").classList.remove("valid");
+        document.getElementById("naziv").classList.add("invalid");
+    }
+
+    if(inputs.opis === "")
+    {
+        isOkay = false;
+        document.getElementById("opis").classList.remove("valid");
+        document.getElementById("opis").classList.add("invalid");
+    }
+
+    if(inputs.slike === "")
+    {
+        isOkay = false;
+        document.getElementById("slike").classList.remove("valid");
+        document.getElementById("slike").classList.add("invalid");
+    }
+
+    inputs.slike.split("\n").forEach(value =>
+        {
+            if(!isImgUrl(value)){
+            isOkay = false;
+            document.getElementById("slike").classList.remove("valid");
+            document.getElementById("slike").classList.add("invalid");
+        }
+    });
+
+    if(inputs.cena === "" || inputs.cena[0] === '-')
+    {
+        isOkay = false;
+        document.getElementById("cena").classList.remove("valid");
+        document.getElementById("cena").classList.add("invalid");
+    }
+
+    if(inputs.maxosobe === "" || inputs.maxosobe[0] === '-')
+    {
+        isOkay = false;
+        document.getElementById("maxosobe").classList.remove("valid");
+        document.getElementById("maxosobe").classList.add("invalid");
+    }
+
+    if(isOkay &&
+     !document.getElementById("cena").classList.contains("invalid") && 
+     !document.getElementById("maxosobe").classList.contains("invalid"))
+    {
+        const editRef = ref(db, "destinacije/" + destsId + "/" + destId);
+        set(editRef, {
+            cena : inputs.cena,
+            maxOsoba : inputs.maxosobe,
+            naziv : inputs.naziv,
+            opis : inputs.opis,
+            prevoz : inputs.prevoz,
+            tip : inputs.tip,
+            slike : inputs.slike.split("\n")
+          }).catch(() => navigate("/dberror"));
+        setEdit(false);
+    }
+  }
 
   return (
     <main>
@@ -92,25 +175,31 @@ const DestinationPage = (props) => {
                     <a className="btn-floating btn-large waves-effect waves-light red" onClick={() => (setEdit(false))}><i className="material-icons">edit</i></a>
                 </span>
                 <div className="row">
-                    <form className="col s12">
+                    <form className="col s12" onSubmit = {izmeni}>
                     <div className="row">
                         <div className="input-field col l6 s12">
-                        <input id="naziv" type="text" className="validate" value = {props.destinations[destsId][destId]['naziv']} />
+                        <input id="naziv" type="text" className="validate" name = "naziv" value = {inputs.naziv || ""} onChange = {handleChange} />
                         <label for="naziv" className = "active">Naziv</label>
+                        <span className = "helper-text" data-error = "Morate uneti naziv"></span>
                         </div>
                         <div className="input-field col l3 s6">
-                        <input id="cena" type="number" className="validate" value = {props.destinations[destsId][destId]['cena']} />
+                        <input id="cena" type="number" className="validate" name = "cena" value = {inputs.cena || ""} onChange = {handleChange} />
                         <label for="cena" className = "active">Cena</label>
+                        <span className = "helper-text" data-error = "Cena mora biti pozitivan ceo broj"></span>
                         </div>
                         <div className="input-field col l3 s6">
-                        <input id="maxosobe" type="number" className="validate" value = {props.destinations[destsId][destId]['maxOsoba']} />
+                        <input id="maxosobe" type="number" className="validate" name = "maxosobe" value = {inputs.maxosobe || ""} onChange = {handleChange} />
                         <label for="maxosobe" className = "active">Maksimalan broj osoba</label>
+                        <span className = "helper-text" data-error = "Maksimalan broj osoba mora biti pozitivan ceo broj"></span>
                         </div>
                     </div>
                     <div className="row">
                         <div className="input-field col s12">
-                        <textarea id="opis" className="materialize-textarea" value = {props.destinations[destsId][destId]['opis']}></textarea>
+                        <textarea id="opis" className="materialize-textarea" name = "opis" onChange = {handleChange}>
+                            {inputs.opis}
+                        </textarea>
                         <label for="opis" className = "active">Opis</label>
+                        <span className = "helper-text" data-error = "Morate uneti opis"></span>
                         </div>
                     </div>
                     <div className="row">
@@ -118,30 +207,15 @@ const DestinationPage = (props) => {
                     </div>
                     <div className = "row">
                         <label>
-                            {   props.destinations[destsId][destId]['tip'] === "Letovanje" &&
-                                <input name="tip" type="radio" checked />
-                            }
-                            {   props.destinations[destsId][destId]['tip'] !== "Letovanje" &&
-                                <input name="tip" type="radio" />
-                            }
+                            <input name="tip" type="radio" value = "Letovanje" checked = {inputs.tip === "Letovanje"} onChange = {handleChange} />
                             <span>Letovanje</span>
                         </label>
                         <label>
-                            {   props.destinations[destsId][destId]['tip'] === "Zimovanje" &&
-                                <input name="tip" type="radio" checked />
-                            }
-                            {   props.destinations[destsId][destId]['tip'] !== "Zimovanje" &&
-                                <input name="tip" type="radio" />
-                            }
+                            <input name="tip" type="radio" value = "Zimovanje" checked = {inputs.tip === "Zimovanje"} onChange = {handleChange} />
                             <span>Zimovanje</span>
                         </label>
                         <label>
-                            {   props.destinations[destsId][destId]['tip'] === "Gradovi Evrope" &&
-                                <input name="tip" type="radio" checked />
-                            }
-                            {   props.destinations[destsId][destId]['tip'] !== "Gradovi Evrope" &&
-                                <input name="tip" type="radio" />
-                            }
+                            <input name="tip" type="radio" value = "Gradovi Evrope" checked = {inputs.tip === "Gradovi Evrope"} onChange = {handleChange} />
                             <span>Gradovi Evrope</span>
                         </label>
                     </div>
@@ -150,39 +224,25 @@ const DestinationPage = (props) => {
                     </div>
                     <div className = "row">
                         <label>
-                            {   props.destinations[destsId][destId]['prevoz'] === "avion" &&
-                                <input name="prevoz" type="radio" checked />
-                            }
-                            {   props.destinations[destsId][destId]['prevoz'] !== "avion" &&
-                                <input name="prevoz" type="radio" />
-                            }
+                            <input name="prevoz" type="radio" value = "avion" checked = {inputs.prevoz === "avion"} onChange = {handleChange} />
                             <span>Avion</span>
                         </label>
                         <label>
-                            {   props.destinations[destsId][destId]['prevoz'] === "autobus" &&
-                                <input name="prevoz" type="radio" checked />
-                            }
-                            {   props.destinations[destsId][destId]['prevoz'] !== "autobus" &&
-                                <input name="prevoz" type="radio" />
-                            }
+                            <input name="prevoz" type="radio" value = "autobus" checked = {inputs.prevoz === "autobus"} onChange = {handleChange} />
                             <span>Autobus</span>
                         </label>
                         <label>
-                            {   props.destinations[destsId][destId]['prevoz'] === "sopstveni" &&
-                                <input name="prevoz" type="radio" checked />
-                            }
-                            {   props.destinations[destsId][destId]['prevoz'] !== "sopstveni" &&
-                                <input name="prevoz" type="radio" />
-                            }
+                            <input name="prevoz" type="radio" value = "sopstveni" checked = {inputs.prevoz === "sopstveni"} onChange = {handleChange} />
                             <span>Sopstveni prevoz</span>
                         </label>
                     </div>
                     <div className="row">
                         <div className="input-field col s12">
-                            <textarea id="slike" className="materialize-textarea">
+                            <textarea id="slike" className="materialize-textarea" name = "slike" onChange = {handleChange}>
                                 {inputs.slike}
                             </textarea>
-                            <label for="slike">Slike(linkovi, odvojite enterom)</label>
+                            <label for="slike" className = "active">Slike(linkovi, odvojite enterom)</label>
+                            <span className = "helper-text" data-error = "Morate uneti validne slike"></span>
                         </div>
                     </div>
                     <div className = "row">
