@@ -2,11 +2,19 @@
 
 This is a website for travel agencies made with react and materialize.
 
-Before starting, you should install a few libraries, and you can do that with:
-npm install react-icons
-npm install react-router-dom
-npm install materialize
-npm install firebase
+Since it was made with react, you have to have npm installed, and you can do that by installing nodejs from:
+[https://nodejs.org/en](https://nodejs.org/en)
+
+When you install npm, you should navigate to traveltheglobe folder(inside wd-sv-36-2022).
+
+Before starting, you should install a few libraries(react,react-icons,react-router-dom,materialize-css,firebase...) there, and you can do that with: \
+### `npm install`
+
+Then you should start with: \
+### `npm start`
+
+This website will then be displayed on http://localhost:3000/ \
+The rest of this readme is the information react initially gives you.
 
 ## Available Scripts
 
