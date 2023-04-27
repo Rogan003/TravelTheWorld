@@ -1,20 +1,22 @@
-# Getting Started with Create React App
+# Project information
 
 This is a website for travel agencies made with react and materialize.
 
 Since it was made with react, you have to have npm installed, and you can do that by installing nodejs from:
 [https://nodejs.org/en](https://nodejs.org/en)
 
-When you install npm, you should navigate to traveltheglobe folder(inside wd-sv-36-2022).
+When you install npm, you should navigate in terminal(or cmd) to traveltheglobe folder(inside wd-sv-36-2022).
 
-Before starting, you should install a few libraries(react,react-icons,react-router-dom,materialize-css,firebase...) there, and you can do that with: \
+Before starting, you should install a few libraries(react,react-icons,react-router-dom,materialize-css,firebase...) there, and you can do that by running this inside of the traveltheglobe folder:
 ### `npm install`
 
-Then you should start with: \
+Then you should run the project with:
 ### `npm start`
 
 This website will then be displayed on http://localhost:3000/ \
 The rest of this readme is the information react initially gives you.
+
+# Getting Started with Create React App
 
 ## Available Scripts
 
