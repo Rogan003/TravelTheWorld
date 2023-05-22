@@ -147,16 +147,16 @@ const DestinationPage = (props) => {
                     </div>
                     <div className="center-align card-panel white flow-text hoverable">
                         <div classname = "col s12">
-                            <p>Tip putovanja: {props.destinations[destsId][destId]['tip']}</p>
+                            <p>Tip putovanja: <strong>{props.destinations[destsId][destId]['tip']}</strong></p>
                         </div>
                         <div classname = "col s12">
-                            <p>Prevoz: {props.destinations[destsId][destId]['prevoz']}</p>
+                            <p>Prevoz: <strong>{props.destinations[destsId][destId]['prevoz']}</strong></p>
                         </div>
                         <div classname = "col s12">
-                            <p>Cena: {props.destinations[destsId][destId]['cena']} dinara</p>
+                            <p>Cena: <strong>{props.destinations[destsId][destId]['cena']} dinara</strong></p>
                         </div>
                         <div classname = "col s12">
-                            <p>Maksimalan broj osoba: {props.destinations[destsId][destId]['maxOsoba']}</p>
+                            <p>Maksimalan broj osoba: <strong>{props.destinations[destsId][destId]['maxOsoba']}</strong></p>
                         </div>
                     </div>
                 </div>

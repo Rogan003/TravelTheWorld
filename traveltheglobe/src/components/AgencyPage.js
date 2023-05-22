@@ -39,28 +39,28 @@ const AgencyPage = (props) => {
         <div className="center-align">
           <h3>Podaci</h3>
         </div>
-      </div><div className="row center-align card-panel white flow-text hoverable">
-        <div className="col s6 l3">
+      </div><div className="row center-align container">
+        <div className="card-panel white flow-text hoverable col s12 l6">
           <p>
-            Adresa:
+            Adresa: <br />
             <strong>{props.agencies[agencyId]['adresa']}</strong>
           </p>
         </div>
-        <div className="col s6 l3">
+        <div className="card-panel white flow-text hoverable col s12 l6">
           <p>
-            Godina osnivanja:
+            Godina osnivanja: <br />
             <strong>{props.agencies[agencyId]['godina']}</strong>
           </p>
         </div>
-        <div className="col s12 l3">
+        <div className="card-panel white flow-text hoverable col s12 l6">
           <p>
-            Broj telefona:
+            Broj telefona: <br />
             <strong>{props.agencies[agencyId]['brojTelefona']}</strong>
           </p>
         </div>
-        <div className="col s12 l3">
+        <div className="card-panel white flow-text hoverable col s12 l6">
           <p>
-            Email:
+            Email: <br />
             <a href={"mailto: " + props.agencies[agencyId]['email']} rel="noopener noreferrer" target="_blank">
               <strong>{props.agencies[agencyId]['email']}</strong>
             </a>

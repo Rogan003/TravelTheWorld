@@ -99,3 +99,11 @@ table img{
 .margin{
     margin: 1vmin;
 }
+
+.container .card-panel{
+    border-radius: 15px;
+}
+
+strong{
+    font-weight: bold;
+}

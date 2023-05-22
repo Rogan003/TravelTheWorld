@@ -7,7 +7,7 @@ import { FaPhoneAlt } from "react-icons/fa";
 const Footer = () => {
   return (
     <footer>
-            <div className = "container flow-text section">
+            <div className = "container section">
                 <span>Kontakt:</span>
                 <div>
                     <FaEnvelope /> 

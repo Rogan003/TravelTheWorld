@@ -28,7 +28,7 @@ function App() {
   }
 
   useEffect(() => {
-    loadData("agencjie",setAgencies);
+    loadData("agencije",setAgencies);
     loadData("destinacije",setDestinations);
     loadData("korisnici",setUsers);
   },[]);

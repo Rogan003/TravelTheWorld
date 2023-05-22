@@ -260,7 +260,7 @@ const Admin = (props) => {
                                 <td><a className="btn-floating btn-small waves-effect waves-light red" onClick = {() => {setEdit(true);setKey(Object.keys(props.agencies)[index]);}}><i class="material-icons">edit</i></a></td>
                                 <td><a className="btn-floating btn-small waves-effect waves-light red modal-trigger" href = {"#destructiona" + index}><i class="material-icons">delete</i></a></td>
                             </tr>
-                            <Destruction id = {"destructiona" + index} naziv = {value['naziv']} db = "agencjie" dbid = {Object.keys(props.agencies)[index]} /></>
+                            <Destruction id = {"destructiona" + index} naziv = {value['naziv']} db = "agencije" dbid = {Object.keys(props.agencies)[index]} /></>
                         );
                       })
                 }
