@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react' 
+import React, { useState, useEffect } from 'react' 
 import Agency from './Agency'
 import { Link } from 'react-router-dom';
 import Logo from '../pics/logo.png'
 import M from 'materialize-css'
 
 const Home = (props) => {
+  const [search,setSearch] = useState("");
+  const [agencies,setAgencies] = useState(props.agencies);
+
   useEffect(() => {
     var elems = document.querySelectorAll('.autocomplete');
     var data = {}
@@ -15,6 +18,31 @@ const Home = (props) => {
     }
 
     M.Autocomplete.init(elems, {data : data});
+    
+    if(search === "")
+    {
+      setAgencies(props.agencies);
+      let highlight = document.querySelectorAll(".agency-name");
+      highlight.forEach(elem => {elem.style.backgroundColor = "white"});
+    }
+    else // ovde autocomplete pravi problem? inace radi super, ali nesto nece zbog ovog setAgencies dole
+    {
+      let passedAgencies = {};
+
+      for(var agency in props.agencies)
+      {
+        if(props.agencies[agency]['naziv'].toLowerCase().includes(search.toLowerCase()))
+        {
+          passedAgencies[agency] = props.agencies[agency]
+        }
+      }
+
+      let highlight = document.querySelectorAll(".agency-name");
+      highlight.forEach(elem => {elem.style.backgroundColor = "yellow"});
+
+      setAgencies(passedAgencies);
+    }
+
   });
 
   return (
@@ -37,7 +65,7 @@ const Home = (props) => {
             <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">search</i>
-                <input type="text" id="autocomplete-input" class="autocomplete" />
+                <input type="text" id="autocomplete-input" class="autocomplete" value = {search} onChange={e => setSearch(e.target.value)} />
                 <label for="autocomplete-input">Pretrazite agencije...</label>
               </div>
             </div>
@@ -46,9 +74,9 @@ const Home = (props) => {
       </div>
       <div className = "row container">
       {
-        Object.values(props.agencies).map((value,index) => {
+        Object.values(agencies).map((value,index) => {
           return (
-              <Agency item = {value} address = {Object.keys(props.agencies)[index]} key = {Object.keys(props.agencies)[index]} />
+              <Agency item = {value} address = {Object.keys(agencies)[index]} key = {Object.keys(agencies)[index]} />
           );
         })
       }
