@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import Destination from './Destination';
 import M from 'materialize-css';
 
 const AgencyPage = (props) => {
   const { agencyId } = useParams();
+  const [search,setSearch] = useState("");
+  const [destinations,setDestinations] = useState(props.destinations[props.agencies[agencyId]['destinacije']]);
 
   const navigate = useNavigate();
 
@@ -18,13 +20,72 @@ const AgencyPage = (props) => {
     var elems = document.querySelectorAll('.autocomplete');
     var data = {}
 
-    for(var agency in props.destinations[props.agencies[agencyId]['destinacije']])
+    for(let dest in props.destinations[props.agencies[agencyId]['destinacije']])
     {
-      data[props.destinations[props.agencies[agencyId]['destinacije']][agency]['naziv']] = null;
+      data[props.destinations[props.agencies[agencyId]['destinacije']][dest]['naziv']] = null;
     }
 
     M.Autocomplete.init(elems, {data : data});
   }, []);
+
+  useEffect(() => {
+    if(search === "")
+    {
+      setDestinations(props.destinations[props.agencies[agencyId]['destinacije']]);
+      let highlight = document.querySelectorAll(".dest-card");
+      highlight.forEach(elem => {elem.style.backgroundColor = "white"});
+    }
+    else // autocomplete ne popuni search samo resiti to sad
+    {
+      let passedDests = {};
+      let search_split = search.split(" ");
+      for(let i = 0;i < search_split.length;i++){
+        let newDests = {};
+        for(let dest in props.destinations[props.agencies[agencyId]['destinacije']])
+        {
+          if(props.destinations[props.agencies[agencyId]['destinacije']][dest]['naziv'].toLowerCase().includes(search_split[i].toLowerCase()))
+          {
+            newDests[dest] = props.destinations[props.agencies[agencyId]['destinacije']][dest];
+          }
+        }
+
+        let highlight = document.querySelectorAll(".dest-card");
+        highlight.forEach(elem => {elem.style.backgroundColor = "yellow"}); // zasto highlight i one koji kasnije budu pronadjeni??
+
+        for(let dest in props.destinations[props.agencies[agencyId]['destinacije']])
+        {
+          if(props.destinations[props.agencies[agencyId]['destinacije']][dest]['prevoz'].toLowerCase().includes(search_split[i].toLowerCase()))
+          {
+            newDests[dest] = props.destinations[props.agencies[agencyId]['destinacije']][dest];
+          }
+
+          if(props.destinations[props.agencies[agencyId]['destinacije']][dest]['tip'].toLowerCase().includes(search_split[i].toLowerCase()))
+          {
+            newDests[dest] = props.destinations[props.agencies[agencyId]['destinacije']][dest];
+          }
+        }
+
+        if(i == 0)
+        {
+          passedDests = {...newDests};
+        }
+        else
+        {
+          let officialDests = {};
+          for(let dest in newDests)
+          {
+            if(passedDests.hasOwnProperty(dest))
+            {
+              officialDests[dest] = newDests[dest];
+            }
+          }
+          passedDests = {...officialDests};
+        }
+      }
+
+      setDestinations(passedDests);
+    }
+  },[search]);
 
   return (
     <main> <div className="row">
@@ -73,7 +134,7 @@ const AgencyPage = (props) => {
             <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">search</i>
-                <input type="text" id="autocomplete-input" class="autocomplete" />
+                <input type="text" id="autocomplete-input" class="autocomplete" value = {search} onChange={e => setSearch(e.target.value)} />
                 <label for="autocomplete-input">Pretrazite destinacije...</label>
               </div>
             </div>
@@ -85,10 +146,10 @@ const AgencyPage = (props) => {
           <h3>Destinacije</h3>
         </div>
       </div><div className="row container">
-        {Object.values(props.destinations[props.agencies[agencyId]['destinacije']]).map((value, index) => {
+        {Object.values(destinations).map((value, index) => {
           return (
-            <Destination item={value} key={Object.keys(props.destinations[props.agencies[agencyId]['destinacije']])[index]}
-              address={props.agencies[agencyId]['destinacije'] + "/" + Object.keys(props.destinations[props.agencies[agencyId]['destinacije']])[index]} />
+            <Destination item={value} key={Object.keys(destinations)[index]}
+              address={props.agencies[agencyId]['destinacije'] + "/" + Object.keys(destinations)[index]} />
           );
         })}
       </div>

@@ -18,32 +18,45 @@ const Home = (props) => {
     }
 
     M.Autocomplete.init(elems, {data : data});
-    
+  },[]);
+
+  useEffect(() => {
     if(search === "")
     {
       setAgencies(props.agencies);
       let highlight = document.querySelectorAll(".agency-name");
       highlight.forEach(elem => {elem.style.backgroundColor = "white"});
     }
-    else // ovde autocomplete pravi problem? inace radi super, ali nesto nece zbog ovog setAgencies dole
+    else // autocomplete ne popuni search samo resiti to sad
     {
       let passedAgencies = {};
 
-      for(var agency in props.agencies)
+      for(let agency in props.agencies)
       {
         if(props.agencies[agency]['naziv'].toLowerCase().includes(search.toLowerCase()))
         {
-          passedAgencies[agency] = props.agencies[agency]
+          passedAgencies[agency] = props.agencies[agency];
         }
       }
 
       let highlight = document.querySelectorAll(".agency-name");
-      highlight.forEach(elem => {elem.style.backgroundColor = "yellow"});
+      highlight.forEach(elem => {elem.style.backgroundColor = "yellow"}); // zasto highlight i one koji kasnije budu pronadjeni??
+
+      for(let agency in props.agencies)
+      {
+        for(let dest in props.destinations[props.agencies[agency]['destinacije']])
+        {
+          if(props.destinations[props.agencies[agency]['destinacije']][dest]['naziv'].toLowerCase().includes(search.toLowerCase()))
+          {
+            passedAgencies[agency] = props.agencies[agency];
+            break;
+          }
+        }
+      }
 
       setAgencies(passedAgencies);
     }
-
-  });
+  },[search]);
 
   return (
     <main className = "center-align">

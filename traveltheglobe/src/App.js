@@ -46,7 +46,7 @@ function App() {
         <>
         <Header users={users} />
         <Routes>
-          <Route path="/" element={<Home agencies={agencies} />} />
+          <Route path="/" element={<Home agencies={agencies} destinations={destinations} />} />
           <Route path="/agencies/:agencyId" element={<AgencyPage agencies={agencies} destinations={destinations} />} />
           <Route path="/agencies/:agencyId/destinations/:destsId/:destId" element={<DestinationPage destinations={destinations} />} />
           <Route path="/admin" element={<Admin agencies={agencies} destinations={destinations} users={users} />} />
