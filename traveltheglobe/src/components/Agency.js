@@ -10,7 +10,7 @@ const Agency = (props) => {
                     <img src={props.item['logo']} className="activator responsive-img" />
                 </div>
                 <div className="card-content activator">
-                    <span className="card-title activator"><span className = "agency-name">{props.item['naziv']}</span><i className="material-icons right ">add_circle</i></span>
+                    <span className="card-title activator"><span id = {props.item['naziv']}>{props.item['naziv']}</span><i className="material-icons right ">add_circle</i></span>
                     <span> 
                         <Link className="btn waves-effect waves-light" to={address}>Otvorite {props.item['naziv']}</Link>
                     </span>

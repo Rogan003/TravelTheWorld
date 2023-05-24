@@ -107,3 +107,7 @@ table img{
 strong{
     font-weight: bold;
 }
+
+.myhighlight{
+    background-color: yellow;
+}

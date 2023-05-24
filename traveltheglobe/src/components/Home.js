@@ -7,6 +7,15 @@ import M from 'materialize-css'
 const Home = (props) => {
   const [search,setSearch] = useState("");
   const [agencies,setAgencies] = useState(props.agencies);
+  const [highlightAgencies,setHighlightAgencies] = useState([]);
+
+  const highlight = (agencies) => {
+    for(let nameId of agencies)
+    {
+      let agencyCard = document.getElementById(nameId);
+      agencyCard.classList.add("myhighlight");
+    }
+  }
 
   useEffect(() => {
     var elems = document.querySelectorAll('.autocomplete');
@@ -17,30 +26,30 @@ const Home = (props) => {
       data[props.agencies[agency]['naziv']] = null;
     }
 
-    M.Autocomplete.init(elems, {data : data});
+    M.Autocomplete.init(elems, {data : data, onAutocomplete : (txt) => setSearch(txt)});
   },[]);
 
   useEffect(() => {
     if(search === "")
     {
       setAgencies(props.agencies);
-      let highlight = document.querySelectorAll(".agency-name");
-      highlight.forEach(elem => {elem.style.backgroundColor = "white"});
+      setHighlightAgencies([]);
     }
-    else // autocomplete ne popuni search samo resiti to sad
+    else
     {
       let passedAgencies = {};
+      let localAgencies = [];
 
       for(let agency in props.agencies)
       {
         if(props.agencies[agency]['naziv'].toLowerCase().includes(search.toLowerCase()))
         {
           passedAgencies[agency] = props.agencies[agency];
+          localAgencies.push(props.agencies[agency]['naziv']);
         }
       }
 
-      let highlight = document.querySelectorAll(".agency-name");
-      highlight.forEach(elem => {elem.style.backgroundColor = "yellow"}); // zasto highlight i one koji kasnije budu pronadjeni??
+      setHighlightAgencies(localAgencies);
 
       for(let agency in props.agencies)
       {
@@ -57,6 +66,18 @@ const Home = (props) => {
       setAgencies(passedAgencies);
     }
   },[search]);
+
+  useEffect(() => {
+    if(highlightAgencies.length > 0)
+    {
+      highlight(highlightAgencies);
+    }
+    else
+    {
+      let highlight = document.querySelectorAll(".myhighlight");
+      highlight.forEach(elem => {elem.classList.remove("myhighlight")});
+    }
+  },[highlightAgencies]);
 
   return (
     <main className = "center-align">

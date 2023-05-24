@@ -7,6 +7,15 @@ const AgencyPage = (props) => {
   const { agencyId } = useParams();
   const [search,setSearch] = useState("");
   const [destinations,setDestinations] = useState(props.destinations[props.agencies[agencyId]['destinacije']]);
+  const [highlightDests,setHighlightDests] = useState([]);
+
+  const highlight = (dests) => {
+    for(let nameId of dests)
+    {
+      let destCard = document.getElementById(nameId);
+      destCard.classList.add("myhighlight");
+    }
+  }
 
   const navigate = useNavigate();
 
@@ -25,20 +34,21 @@ const AgencyPage = (props) => {
       data[props.destinations[props.agencies[agencyId]['destinacije']][dest]['naziv']] = null;
     }
 
-    M.Autocomplete.init(elems, {data : data});
+    M.Autocomplete.init(elems, {data : data,onAutocomplete : (txt) => setSearch(txt)});
   }, []);
 
   useEffect(() => {
     if(search === "")
     {
       setDestinations(props.destinations[props.agencies[agencyId]['destinacije']]);
-      let highlight = document.querySelectorAll(".dest-card");
-      highlight.forEach(elem => {elem.style.backgroundColor = "white"});
+      setHighlightDests([]);
     }
-    else // autocomplete ne popuni search samo resiti to sad
+    else
     {
       let passedDests = {};
+      let localDests = [];
       let search_split = search.split(" ");
+
       for(let i = 0;i < search_split.length;i++){
         let newDests = {};
         for(let dest in props.destinations[props.agencies[agencyId]['destinacije']])
@@ -46,11 +56,11 @@ const AgencyPage = (props) => {
           if(props.destinations[props.agencies[agencyId]['destinacije']][dest]['naziv'].toLowerCase().includes(search_split[i].toLowerCase()))
           {
             newDests[dest] = props.destinations[props.agencies[agencyId]['destinacije']][dest];
+            localDests.push(props.destinations[props.agencies[agencyId]['destinacije']][dest]['naziv']);
           }
         }
 
-        let highlight = document.querySelectorAll(".dest-card");
-        highlight.forEach(elem => {elem.style.backgroundColor = "yellow"}); // zasto highlight i one koji kasnije budu pronadjeni??
+        setHighlightDests(localDests);
 
         for(let dest in props.destinations[props.agencies[agencyId]['destinacije']])
         {
@@ -65,7 +75,7 @@ const AgencyPage = (props) => {
           }
         }
 
-        if(i == 0)
+        if(i === 0)
         {
           passedDests = {...newDests};
         }
@@ -86,6 +96,18 @@ const AgencyPage = (props) => {
       setDestinations(passedDests);
     }
   },[search]);
+
+  useEffect(() => {
+    if(highlightDests.length > 0)
+    {
+      highlight(highlightDests);
+    }
+    else
+    {
+      let highlight = document.querySelectorAll(".myhighlight");
+      highlight.forEach(elem => {elem.classList.remove("myhighlight")});
+    }
+  },[highlightDests]);
 
   return (
     <main> <div className="row">

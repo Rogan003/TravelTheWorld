@@ -11,7 +11,7 @@ const Destination = (props) => {
             <img src = {props.item['slike'][0]}/>
           </div>
           <div className="card-stacked black-text">
-            <div className = "card-content"><strong className="card-title"><span className = "dest-card">{props.item['naziv']}</span></strong></div>
+            <div className = "card-content"><strong className="card-title"><span id={props.item['naziv']}>{props.item['naziv']}</span></strong></div>
             <Link className="btn waves-effect waves-light center-align" to={address}>Pogledajte</Link>
           </div>
         </div>

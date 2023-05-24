@@ -25,7 +25,7 @@ function App() {
         func(snapshot.val());
       }
     }); // .catch(() => {navigate("/dberror")}) ovu foru namestiti nekako drugacije, navigate moze samo u routeru da se koristi
-  }
+  }     // preko onog statusa upita
 
   useEffect(() => {
     loadData("agencije",setAgencies);
