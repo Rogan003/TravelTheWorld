@@ -15,17 +15,21 @@ function App() {
   const [agencies,setAgencies] = useState("a");
   const [destinations,setDestinations] = useState("d");
   const [users,setUsers] = useState("u");
-
+  
   const loadData = (item,func) => {
     const query = ref(db, item);
-  
+    
     onValue(query, (snapshot) => {
       if(snapshot.exists())
       {
         func(snapshot.val());
       }
-    }); // .catch(() => {navigate("/dberror")}) ovu foru namestiti nekako drugacije, navigate moze samo u routeru da se koristi
-  }     // preko onog statusa upita
+      else
+      {
+        window.location = "/dberror";
+      }
+    }, () => {window.location = "/dberror"});
+  }
 
   useEffect(() => {
     loadData("agencije",setAgencies);

@@ -1,0 +1,6 @@
+-S obzirom da na karticama za agencije nemam napisane destinacije, oznaceni ce biti samo nazivi agencija koji budu pronadjeni(mada ce search raditi svakako).
+Isto vazi i za destinacije, tj bice oznacen samo naziv destinacije ako je ukucan, ali ce search raditi za sve.
+
+-Dodavanje slika za destinacije i agencije se vrsi preko unosa linkova do online slike u input polja. Svaki link odvojiti enterom.
+
+-Format broja telefona je ili strogo brojevi ili sa + na pocetku ili sa / na cetvrtom mestu

@@ -14,6 +14,10 @@ const Admin = (props) => {
 
   const navigate = useNavigate();
 
+  function isImgUrl(url) {
+    return /\.(jpg|jpeg|png|webp|avif|gif)$/.test(url)
+  }
+
   useEffect(() => {
     window.scrollTo(0, 0);
   },[]);
@@ -24,7 +28,13 @@ const Admin = (props) => {
       if(props.agencies.hasOwnProperty(key))
       {
         setInputs({
-
+          agencija_naziv : props.agencies[key]['naziv'],
+          agencija_adresa : props.agencies[key]['adresa'],
+          agencija_godina : props.agencies[key]['godina'],
+          agencija_logo : props.agencies[key]['logo'],
+          agencija_email : props.agencies[key]['email'],
+          agencija_brojTelefona : props.agencies[key]['brojTelefona'],
+          agencija_destinacije : props.agencies[key]['destinacije']
         });
       }
       else
@@ -175,12 +185,106 @@ const Admin = (props) => {
       }
   }
 
+  const editAgency = (event) => {
+    event.preventDefault();
+    let isOkay = true;
+
+    if(!inputs.agencija_naziv || inputs.agencija_naziv === "")
+    {
+      isOkay = false;
+      document.getElementById("agencija_naziv").classList.remove("valid");
+      document.getElementById("agencija_naziv").classList.add("invalid");
+    }
+
+    if(!inputs.agencija_adresa || inputs.agencija_adresa === "")
+    {
+      isOkay = false;
+      document.getElementById("agencija_adresa").classList.remove("valid");
+      document.getElementById("agencija_adresa").classList.add("invalid");
+    }
+
+    if(inputs.agencija_brojTelefona && inputs.agencija_brojTelefona !== "")
+      {
+        let phone = inputs.agencija_brojTelefona.replaceAll(" ","");
+        phone = phone.replaceAll("-","");
+        if(phone[0] === "+")
+        {
+          phone = phone.substring(1);
+        }
+        
+        if(phone[3] === "/" && +phone.substring(0,3))
+        {
+          phone = phone.substring(4);
+        }
+
+        if(!+phone)
+        {
+          isOkay = false;
+          document.getElementById("agencija_brojTelefona").classList.remove("valid");
+          document.getElementById("agencija_brojTelefona").classList.add("invalid");
+        }
+      }
+      else
+      {
+        isOkay = false;
+        document.getElementById("agencija_brojTelefona").classList.remove("valid");
+        document.getElementById("agencija_brojTelefona").classList.add("invalid");
+      }
+
+      if(!inputs.agencija_email)
+      {
+        isOkay = false;
+        document.getElementById("agencija_email").classList.remove("valid");
+        document.getElementById("agencija_email").classList.add("invalid");
+      }
+      
+      if(!inputs.agencija_godina || inputs.agencija_godina !== "")
+      {
+        if(!+inputs.agencija_godina || +inputs.agencija_godina > 2023)
+        {
+          isOkay = false;
+          document.getElementById("agencija_godina").classList.remove("valid");
+          document.getElementById("agencija_godina").classList.add("invalid");
+        }
+      }
+      else
+      {
+        isOkay = false;
+        document.getElementById("agencija_godina").classList.remove("valid");
+        document.getElementById("agencija_godina").classList.add("invalid");
+      }
+
+      if(!inputs.agencija_logo || inputs.agencija_logo === "" || !isImgUrl(inputs.agencija_logo))
+      {
+        isOkay = false;
+        document.getElementById("agencija_logo").classList.remove("valid");
+        document.getElementById("agencija_logo").classList.add("invalid");
+      }
+
+    if(isOkay && document.getElementById("agencija_email").classList.contains("valid"))
+    {
+      const editAgencyRef = ref(db, 'agencije/' + key);
+        set(editAgencyRef, {
+          "naziv": inputs.agencija_naziv,
+          "adresa": inputs.agencija_adresa,
+          "brojTelefona": inputs.agencija_brojTelefona,
+          "email": inputs.agencija_email,
+          "godina": inputs.agencija_godina,
+          "logo": inputs.agencija_logo,
+          "destinacije": inputs.agencija_destinacije
+        }).catch(() => navigate("/dberror"));
+        setEdit(false);
+        setView(true);
+    }
+  }
+
   return (
     <main className = "container center-align">
         <h1>Admin stranica</h1>
         <a class="btn-floating btn-large waves-effect waves-light red tooltipped" data-position="right" data-tooltip="Korisnici/Agencije" onClick={() => {setView(!view);setEdit(false);}}>
           <i class="material-icons">cached</i>
         </a>
+        <div className = "hide-on-large-only row small-info">Korisnici/Agencije</div>
         {
           view && !edit &&
           <>
@@ -342,35 +446,41 @@ const Admin = (props) => {
               <h3>Izmeni {props.agencies[key]['naziv']}</h3>
           </div>
           <div className="row">
-              <form className="col s12">
+              <form className="col s12" onSubmit = {editAgency}>
                 <div className = "row">
                 <div class="input-field col l6 s12">
-                  <input id="naziv" type="text" className="validate" value = {props.agencies[key]['naziv']} />
-                  <label className = "active" for="naziv">Naziv</label>
+                  <input id="agencija_naziv" type="text" className="validate" name = "agencija_naziv" value = {inputs.agencija_naziv} onChange = {handleChange} />
+                  <label className = "active" for="agencija_naziv">Naziv</label>
+                  <span className = "helper-text" data-error = "Naziv ne moze biti prazno polje!"></span>
                 </div>
                 <div class="input-field col l6 s12">
-                  <input id="email" type="email" class="validate" value = {props.agencies[key]['email']} />
-                  <label className = "active" for="email">E-mail</label>
+                  <input id="agencija_email" type="email" class="validate" name = "agencija_email" value = {inputs.agencija_email} onChange = {handleChange} />
+                  <label className = "active" for="agencija_email">E-mail</label>
+                  <span className = "helper-text" data-error = "Neispravan format e-maila!"></span>
                 </div>
               </div>
               <div className = "row">
                 <div class="input-field col l6 s12">
-                  <input id="logo" type="text" class="validate" value = {props.agencies[key]['logo']} />
-                  <label className = "active" for="logo">Logo</label>
+                  <input id="agencija_logo" type="text" class="validate" name = "agencija_logo" value = {inputs.agencija_logo} onChange = {handleChange} />
+                  <label className = "active" for="agencija_logo">Logo</label>
+                  <span className = "helper-text" data-error = "Nepostojeca slika!"></span>
                 </div>
                 <div class="input-field col l6 s12">
-                  <input id="brojTelefona" type="text" class="validate" value = {props.agencies[key]['brojTelefona']} />
-                  <label className = "active" for="brojTelefona">Broj telefona</label>
+                  <input id="agencija_brojTelefona" type="text" class="validate" name = "agencija_brojTelefona" value = {inputs.agencija_brojTelefona} onChange = {handleChange} />
+                  <label className = "active" for="agencija_brojTelefona">Broj telefona</label>
+                  <span className = "helper-text" data-error = "Neispravan format telefona!"></span>
                 </div>
               </div>
               <div className = "row">
                 <div class="input-field col l8 s12">
-                  <input id="adresa" type="text" class="validate" value = {props.agencies[key]['adresa']} />
-                  <label className = "active" for="adresa">Adresa</label>
+                  <input id="agencija_adresa" type="text" class="validate" name = "agencija_adresa" value = {inputs.agencija_adresa} onChange = {handleChange} />
+                  <label className = "active" for="agencija_adresa">Adresa</label>
+                  <span className = "helper-text" data-error = "Adresa ne moze biti prazno polje!"></span>
                 </div>
                 <div class="input-field col l4 s12">
-                  <input id="godina" type="number" class="validate" value = {props.agencies[key]['godina']} />
-                  <label className = "active" for="godina">Godina osnivanja</label>
+                  <input id="agencija_godina" type="number" class="validate" name = "agencija_godina" value = {inputs.agencija_godina} onChange = {handleChange} />
+                  <label className = "active" for="agencija_godina">Godina osnivanja</label>
+                  <span className = "helper-text" data-error = "Godina mora biti broj i u proslosti!"></span>
                 </div>
               </div>
               <div className = "row valign-wrapper">
@@ -403,7 +513,7 @@ const Admin = (props) => {
                   <button class="btn waves-effect waves-light" onClick = {() => (setEdit(false))}>Nazad
                       <i class="material-icons right">arrow_back</i>
                   </button>
-                  <button class="btn waves-effect waves-light">Izmenite agenciju
+                  <button class="btn waves-effect waves-light" type="submit" name="agencija_action">Izmenite agenciju
                       <i class="material-icons right">send</i>
                   </button>
               </div>

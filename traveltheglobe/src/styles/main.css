@@ -111,3 +111,9 @@ strong{
 .myhighlight{
     background-color: yellow;
 }
+
+.small-info{
+    margin-top: 1%;
+    font-weight: 500;
+    font-size: medium;
+}
