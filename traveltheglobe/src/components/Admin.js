@@ -489,7 +489,7 @@ const Admin = (props) => {
                 </div>
                 <div className = "col s5">
                   <a className="btn-floating btn-small waves-effect waves-light red modal-trigger" href = "#adddest"><i class="material-icons">add</i></a>
-                  <AddDestinations />
+                  <AddDestinations dests_key = {inputs.agencija_destinacije} />
                 </div>
               </div>
               <div className = "row">

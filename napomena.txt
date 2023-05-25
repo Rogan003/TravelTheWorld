@@ -4,3 +4,5 @@ Isto vazi i za destinacije, tj bice oznacen samo naziv destinacije ako je ukucan
 -Dodavanje slika za destinacije i agencije se vrsi preko unosa linkova do online slike u input polja. Svaki link odvojiti enterom.
 
 -Format broja telefona je ili strogo brojevi ili sa + na pocetku ili sa / na cetvrtom mestu
+
+-Dodavanje i brisanje destinacija u izmeni agencije je nezavisno od dugmeta za izmenu agencije, te ako nesto obrisemo sigurno, bice obrisano, isto vazi i za dodavanje, cak i ako se ne pritisne dugme za izmenu citave agencije.
