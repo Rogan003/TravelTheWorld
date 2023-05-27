@@ -3,6 +3,13 @@ Isto vazi i za destinacije, tj bice oznacen samo naziv destinacije ako je ukucan
 
 -Dodavanje slika za destinacije i agencije se vrsi preko unosa linkova do online slike u input polja. Svaki link odvojiti enterom.
 
--Format broja telefona je ili strogo brojevi ili sa + na pocetku ili sa / na cetvrtom mestu
+-Format broja telefona je ili sa + na pocetku ili sa / na cetvrtom mestu ili samo brojevi i crtice
 
 -Dodavanje i brisanje destinacija u izmeni agencije je nezavisno od dugmeta za izmenu agencije, te ako nesto obrisemo sigurno, bice obrisano, isto vazi i za dodavanje, cak i ako se ne pritisne dugme za izmenu citave agencije.
+
+-Stranica za gresku se aktivira kad god dat pogresan link, tj unese se u url losa agencija(ili jednostavno nesto tipa: http://localhost:3000/nesto)
+
+-Stranica za izmenu destinacije se nalazi na samoj stranici destinacije, postoji dugme za izmenu i za nazad
+
+-Pretraga za destinacije radi po razmaku, ukoliko se unese naziv destinacije razmak tip razmak prevoz on ce traziti da je zadovoljeno sve.
+Naravno moguce je uneti i samo jednu stvar ili dve stvari da se zadovolje(razmakom odvojene takodje).

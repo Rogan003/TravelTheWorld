@@ -184,7 +184,7 @@ const Register = (props) => {
               </div>
               <div class="input-field col l4 s12">
                 <input id="telefon" type="text" class="validate" name = "telefon" value = {inputs.telefon || ""} onChange = {handleChange} />
-                <label for="telefon">Broj telefona</label>
+                <label for="telefon">Broj telefona(+381 6x xxx..)</label>
                 <span className = "helper-text" data-error = "Neispravan broj telefona"></span>
               </div>
             </div>

@@ -5,7 +5,7 @@ import { ref, set, push } from "firebase/database";
 import { db } from '../firebase-config';
 
 const AddDestinations = (props) => {
-  const [inputs,setInputs] = useState({});
+  const [inputs,setInputs] = useState({dest_tip : "Letovanje", dest_prevoz : "autobus"});
 
   const navigate = useNavigate();
 

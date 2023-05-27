@@ -116,7 +116,7 @@ const AgencyPage = (props) => {
         <h1>{props.agencies[agencyId]['naziv']}</h1>
       </div>
     </div><div className="row">
-        <div className="center-align col m8 offset-m2 l4 offset-l4">
+        <div className="center-align col s10 offset-s1 col m8 offset-m2 l4 offset-l4">
           <img className="responsive-img logo z-depth-3" src={props.agencies[agencyId]['logo']} alt="Logo" />
         </div>
       </div><div className="row">

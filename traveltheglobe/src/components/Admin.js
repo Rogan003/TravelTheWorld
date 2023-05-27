@@ -167,7 +167,7 @@ const Admin = (props) => {
         document.getElementById("email2").classList.add("invalid");
       }
       
-      if(isOkay && document.getElementById("email2").classList.contains("valid"))
+      if(isOkay && !document.getElementById("email2").classList.contains("invalid"))
       {
         const editUserRef = ref(db, 'korisnici/' + key);
         set(editUserRef, {
@@ -261,7 +261,7 @@ const Admin = (props) => {
         document.getElementById("agencija_logo").classList.add("invalid");
       }
 
-    if(isOkay && document.getElementById("agencija_email").classList.contains("valid"))
+    if(isOkay && !document.getElementById("agencija_email").classList.contains("invalid"))
     {
       const editAgencyRef = ref(db, 'agencije/' + key);
         set(editAgencyRef, {
@@ -274,7 +274,7 @@ const Admin = (props) => {
           "destinacije": inputs.agencija_destinacije
         }).catch(() => navigate("/dberror"));
         setEdit(false);
-        setView(true);
+        setView(false);
     }
   }
 
@@ -423,7 +423,7 @@ const Admin = (props) => {
                 </div>
                 <div class="input-field col l4 s12">
                   <input id="telefon2" type="text" class="validate" name = "telefon2" value = {inputs.telefon2} onChange = {handleChange} />
-                  <label className = "active" for="telefon2">Broj telefona</label>
+                  <label className = "active" for="telefon2">Broj telefona(+381 6x xxx..)</label>
                   <span className = "helper-text" data-error = "Neispravan broj telefona"></span>
                 </div>
               </div>
@@ -467,7 +467,7 @@ const Admin = (props) => {
                 </div>
                 <div class="input-field col l6 s12">
                   <input id="agencija_brojTelefona" type="text" class="validate" name = "agencija_brojTelefona" value = {inputs.agencija_brojTelefona} onChange = {handleChange} />
-                  <label className = "active" for="agencija_brojTelefona">Broj telefona</label>
+                  <label className = "active" for="agencija_brojTelefona">Broj telefona(+381 6x xxx..)</label>
                   <span className = "helper-text" data-error = "Neispravan format telefona!"></span>
                 </div>
               </div>

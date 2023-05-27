@@ -18,17 +18,13 @@ function App() {
   
   const loadData = (item,func) => {
     const query = ref(db, item);
-    
+
     onValue(query, (snapshot) => {
       if(snapshot.exists())
       {
         func(snapshot.val());
       }
-      else
-      {
-        window.location = "/dberror";
-      }
-    }, () => {window.location = "/dberror"});
+    });
   }
 
   useEffect(() => {
