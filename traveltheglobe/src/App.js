@@ -17,6 +17,31 @@ function App() {
   const [users,setUsers] = useState("u");
   
   const loadData = (item,func) => {
+    if(window.location.pathname !== '/dberror')
+    {
+      setAgencies("a");
+      setDestinations("d");
+      setUsers("u");
+      var request = new XMLHttpRequest();
+      var firebaseUrl = "https://traveltheglobe-af89d-default-rtdb.europe-west1.firebasedatabase.app";
+      request.onreadystatechange = function () {
+          if (this.readyState === 4) {
+              if (this.status !== 200) {
+                window.location = "/dberror";
+              }
+          }
+      }
+
+      request.open('GET', firebaseUrl + '/agencije.json');
+      request.send();
+    }
+    else
+    {
+      setAgencies("a2");
+      setDestinations("d2");
+      setUsers("u2");
+    }
+    
     const query = ref(db, item);
 
     onValue(query, (snapshot) => {
@@ -36,13 +61,22 @@ function App() {
   return (
     <Router>
       {
+        (agencies === "a2" && destinations === "d2" && users === "u2") &&
+        <>
+        <Header users={users} />
+        <Routes>
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+        </>
+      }
+      {
         (agencies === "a" || destinations === "d" || users === "u") && 
         <div className = "section progress">
           <div className = "indeterminate"></div>
         </div>
       }
       {
-        !(agencies === "a" || destinations === "d" || users === "u") &&
+        !(agencies === "a" || destinations === "d" || users === "u") && !(agencies === "a2" && destinations === "d2" && users === "u2") &&
         <>
         <Header users={users} />
         <Routes>

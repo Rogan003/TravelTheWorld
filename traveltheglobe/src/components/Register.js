@@ -110,7 +110,8 @@ const Register = (props) => {
           "adresa": inputs.adresa,
           "telefon": inputs.telefon
         }).catch(() => navigate("/dberror"));
-
+        
+        M.toast({html: 'Uspesno ste registrovani!'});
         var instance = M.Modal.getInstance(document.getElementById("register"));
         instance.close();
       }
